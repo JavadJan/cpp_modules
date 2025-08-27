@@ -35,7 +35,7 @@ void PhoneBook::add(Contact contact, int count)
 
 void	display_phonebook(Contact contact[], int count)
 {
-	int limit = std::min(count, 8);
+	int limit = count < 8 ? count : 8;
 	std::cout << "\033[1;32m|\033[0m";
 	print_cell("Index");
 
@@ -56,7 +56,7 @@ void	display_phonebook(Contact contact[], int count)
 	std::cout << "\033[1;32m|\033[0m";
 	std::cout << '\n';
 
-	for (size_t y = 0; y < limit; y++)
+	for (int y = 0; y < limit; y++)
 	{
 		std::cout << "\033[1;32m|\033[0m";
 		print_cell(contact[y].getIndex());
@@ -82,6 +82,7 @@ void	display_phonebook(Contact contact[], int count)
 void PhoneBook::search()
 {
 	std::string search;
+	std::stringstream ss;
 
 	std::cout << "run search method\n";
 	search = get_value("🔍 search: ");
@@ -95,17 +96,20 @@ void PhoneBook::search()
 	{
 		const Contact &c = this->contact[i];
 
+		ss << c.getIndex();
+		std::string str_index = ss.str();
 		if (
+			str_index.find(search) != std::string::npos ||
 			c.getName().find(search)     != std::string::npos ||
 			c.getLastName().find(search) != std::string::npos ||
 			c.getNickname().find(search) != std::string::npos ||
-			c.getPhoneNumber().find(search) != std::string::npos ||
-			std::to_string(c.getIndex()).find(search) != std::string::npos
+			c.getPhoneNumber().find(search) != std::string::npos
 		)
 		{
 			std::cout << "✔️ Found match in contact index " << c.getIndex() << '\n';
 			found_c[j++] = c;
  			found = true;
+			break ;
 		}
 	}
 
@@ -119,3 +123,7 @@ void PhoneBook::search()
 	//						contact.index.contain(search)}
 
 }
+
+/* 
+	there are two find() function one std::string::find() and other is std::find()->algorithm
+*/

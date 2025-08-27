@@ -14,8 +14,14 @@ Contact::Contact(std::string name, std::string l_name, std::string nickname,
 Contact::~Contact() {
 }
 
-Contact::Contact() : name(""), l_name(""), nickname(""), phone_num(""), secret(""), index(0) {
-}
+Contact::Contact() :
+    name(""),
+    l_name(""),
+    nickname(""),
+    secret(""),
+    phone_num(""),
+    index(0)
+{}
 
 std::string Contact::getName() const { return this->name; }
 std::string Contact::getLastName() const { return this->l_name; }

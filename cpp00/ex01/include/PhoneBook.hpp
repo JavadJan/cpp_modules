@@ -3,6 +3,9 @@
 #include <iostream>
 #include "Contact.hpp"
 #include <iomanip>
+#include <cstdlib>
+#include <sstream>
+
 class PhoneBook
 {
 	private:
@@ -14,7 +17,7 @@ class PhoneBook
 		~PhoneBook();
 		void add(Contact contact, int count);
 		void search();
-		int exit();
+		int exit_();
 		//Contact []getContact(){return Contact[]};
 };
 

@@ -26,7 +26,7 @@ int unkown_cmd(std::string state)
 	return (0);
 }
 
-int PhoneBook::exit()
+int PhoneBook::exit_()
 {
 	std::cout << "exited!\n";
 	return (0);
@@ -49,7 +49,7 @@ int	main(void)
 	{
 		std::cout << "'EXIT' to exit, 'SEARCH' to search in Phonebook, 'ADD' to add new contact: ";
 		
-		std::getline(std::cin, state);
+		std::getline(std::cin, state); // get the value from STDIN in state
 
 		if (std::cin.eof())
 		{
@@ -67,7 +67,7 @@ int	main(void)
 			continue;
 		if (state == "EXIT" || state == "exit")
 		{
-			return (phonebook.exit());
+			return (phonebook.exit_());
 		}
 		else if (state == "ADD" || state == "add")
 		{
