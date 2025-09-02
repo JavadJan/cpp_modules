@@ -6,7 +6,7 @@ class	Fixed
 {
 	private:
 		int fixed_point;
-		static const int fractional;
+		static const int fractional; // it can be 100 or 1000 but here is 10^8
 	public:
 		Fixed();
 		~Fixed();
