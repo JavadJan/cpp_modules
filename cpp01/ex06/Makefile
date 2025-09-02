@@ -1,5 +1,6 @@
 CC = g++
-FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -I.
+HEADER = Harl.cpp
 
 SRC = main.cpp Harl.cpp
 
@@ -9,9 +10,12 @@ OBJ = $(SRC:.cpp=.o)
 all : $(NAME)
 
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(HEADER)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "✅ successfully created 🏗️ 🛠️!"
+
+%.o:%.cpp
+	$(CC) $(FLAGS) -c $< -o $@
 
 clean :
 	rm -f $(OBJ)

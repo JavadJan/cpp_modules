@@ -8,6 +8,6 @@ int main(int ac, char **av)
 		return (1);
 	}
 	Harl harl;
-	harl.complain(av[1]);
+	harl.complain(std::string(av[1]));
 	return (0);
 }

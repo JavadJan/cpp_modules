@@ -22,53 +22,51 @@ void Harl::error()
 {
 	std::cout << "[ERROR]\n This is unacceptable! I want to speak to the manager now.\n";
 }
-Harl::Harl(){}
-
-Harl::~Harl(){}
+Harl::Harl(){
+	std::cout << "\033[1;32mDefault Constructor called\033[0m" << std::endl;
+}
+Harl::~Harl(){
+	std::cout << "\033[1;31mDestructor called\033[0m" << std::endl;
+}
 
 void Harl::complain(std::string level)
 {
 	std::string levels [] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	int expr = -1;
-
-	typedef void (Harl::*func_ptr)();
-	func_ptr call_func [] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-	for (size_t i = 0; i < 4; i++)
-	{
+	int i = 0;
+	//typedef void (Harl::*func_ptr)();
+	void (Harl::*call_func[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	while (i < 4)
+	{	
 		if (levels[i] == level)
 		{
 			expr = i;
 			break;
 		}
+		i++;
 	}
 	if (expr == -1)
 	{
 		std::cout << "level is not found, or miss seppelling!\n";
 		return ;
 	}
-	for (size_t j = expr; j < 4; j++)
+	switch (i)
 	{
-		switch (j)
-		{
-			case (0):
-				(this->*call_func[0])();						
-				break;
-			case (1):
-				(this->*call_func[1])();						
-				break;
-			case (2):
-				(this->*call_func[2])();						
-				break;
-			case (3):
-				(this->*call_func[3])();						
-				break;
-		
-		default:
+		case (0):
+			(this->*call_func[0])();						
 			break;
-		}
-		
-	}
+		case (1):
+			(this->*call_func[1])();						
+			break;
+		case (2):
+			(this->*call_func[2])();						
+			break;
+		case (3):
+			(this->*call_func[3])();						
+			break;
 	
-
+	default:
+		break;
+	}	
 }
