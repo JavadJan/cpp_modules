@@ -1,14 +1,14 @@
-#include "HumanB.hpp"
+#include "./include/HumanB.hpp"
 
 
 HumanB::~HumanB()
 {
-
+	std::cout << "\033[1;31mCalled destructor HumanB\033[0m" << std::endl;
 }
 
-HumanB::HumanB(std::string name): name(name), weapon(NULL)
+HumanB::HumanB(std::string name):name(name), weapon(NULL)
 {
-
+	std::cout << "\033[1;32mCalled constructor HumanB with parameter!\033[0m" << std::endl;
 }
 
 std::string HumanB::getName() const

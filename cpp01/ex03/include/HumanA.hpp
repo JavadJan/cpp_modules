@@ -5,15 +5,15 @@
 class HumanA
 {
 	private:
-		Weapon& weapon; // &non-null
 		std::string name;
+		Weapon& weapon; // &non-null
 	public:
 		//HumanA();
 		HumanA(std::string name, Weapon& weapon);
 		~HumanA();
 		//HumanA( const HumanA& other) // copy constructor, duplicate
 		//HumanA& operator = (const HumanA& other);
-		Weapon& getWeapon() const;
+		const Weapon& getWeapon() const;
 		std::string getName() const;
 		void  attack();
 };

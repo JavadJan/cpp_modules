@@ -1,15 +1,17 @@
-#include "Weapon.hpp"
+#include "./include/Weapon.hpp"
 
-Weapon::Weapon() : type(type){
+Weapon::Weapon() : type(""){
+	std::cout << "called default constructor" << std::endl;
 }
 
-Weapon::Weapon(std::string type)
+Weapon::Weapon(std::string type): type(type)
 {
 	this->type = type;
+	std::cout << "called constructor with parameter" << std::endl;
 }
 Weapon::~Weapon()
 {
-
+	std::cout << "called desctructor" << std::endl;
 }
 
 //Weapon::Weapon(const Weapon &other)

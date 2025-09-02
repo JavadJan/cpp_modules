@@ -1,4 +1,4 @@
-#include "HumanA.hpp"
+#include "./include/HumanA.hpp"
 
 //HumanA::HumanA()
 //{
@@ -6,19 +6,20 @@
 //}
 HumanA::~HumanA()
 {
-	
+	std::cout << "\033[1;31mCalled destructor HumanA\033[0m" << std::endl;
 }
 
-Weapon& HumanA::getWeapon() const{
-	return (this->weapon);
+const Weapon& HumanA::getWeapon() const {
+    return this->weapon;
 }
+
 std::string HumanA::getName() const{
 	return (this->name);
 }
 
-HumanA::HumanA(std::string name, Weapon& weapon) :name(name), weapon(weapon)
+HumanA::HumanA(std::string name, Weapon& weapon) : name(name), weapon(weapon)
 {
-
+	std::cout << "\033[1;32mCalled constructor HumanA with parameter!\033[0m" << std::endl;
 }
 
 void HumanA::attack()
