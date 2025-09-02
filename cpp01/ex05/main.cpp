@@ -8,3 +8,7 @@ int main()
 	harl.complain("warning");
 	harl.complain("error");
 }
+
+/*	GOAL: is to use pointers to member functions. 
+
+*/
