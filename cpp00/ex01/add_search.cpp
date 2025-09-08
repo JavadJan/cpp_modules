@@ -35,7 +35,7 @@ void PhoneBook::add(Contact contact, int count)
 
 void	display_phonebook(Contact contact[], int count)
 {
-	int limit = count < 8 ? count : 8;
+	//int limit = count < 8 ? count : 8;
 	std::cout << "\033[1;32m|\033[0m";
 	print_cell("Index");
 
@@ -50,13 +50,13 @@ void	display_phonebook(Contact contact[], int count)
 	std::cout << "\033[1;32m|\033[0m";
 	print_cell("Nickname");
 
-	std::cout << "\033[1;32m|\033[0m";
-	print_cell("Phone Num");
+	//std::cout << "\033[1;32m|\033[0m";
+	//print_cell("Phone Num");
 
 	std::cout << "\033[1;32m|\033[0m";
 	std::cout << '\n';
 
-	for (int y = 0; y < limit; y++)
+	for (int y = 0; y < count; y++) // why not count?
 	{
 		std::cout << "\033[1;32m|\033[0m";
 		print_cell(contact[y].getIndex());
@@ -71,8 +71,8 @@ void	display_phonebook(Contact contact[], int count)
 		std::cout << "\033[1;32m|\033[0m";
 		print_cell(contact[y].getNickname());
 
-		std::cout << "\033[1;32m|\033[0m";
-		print_cell(contact[y].getPhoneNumber());
+		//std::cout << "\033[1;32m|\033[0m";
+		//print_cell(contact[y].getPhoneNumber());
 
 		std::cout << "\033[1;32m|\033[0m";
 		std::cout << '\n';
@@ -95,28 +95,31 @@ void PhoneBook::search()
 	for (size_t i = 0; i < 8; i++)	
 	{
 		const Contact &c = this->contact[i];
-
+				
 		ss << c.getIndex();
 		std::string str_index = ss.str();
 		if (
-			str_index.find(search) != std::string::npos ||
 			c.getName().find(search)     != std::string::npos ||
 			c.getLastName().find(search) != std::string::npos ||
 			c.getNickname().find(search) != std::string::npos ||
+			str_index.find(search) != std::string::npos ||
 			c.getPhoneNumber().find(search) != std::string::npos
 		)
 		{
-			std::cout << "✔️ Found match in contact index " << c.getIndex() << '\n';
+			//std::cout << c.getLastName() << "is found" << std::endl;
 			found_c[j++] = c;
  			found = true;
-			break ;
+			//break ;
 		}
 	}
 
 	if (!found)
 		std::cout << "❌ No matching contacts found for \"" << search << "\"\n";
 	else
+	{
+		std::cout << "✔️ Found match " << j << "contacts " << std::endl;
 		display_phonebook(found_c, j);
+	}
 	//std::cout << "search for " << search << '\n';
 	// FROM Contact WHERE {contact.name.contain(search) || contact.lastname.contain(search)
 	//						contact.nickname.contain(search) || contact.tel.contain(search)

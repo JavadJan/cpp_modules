@@ -56,9 +56,10 @@ int	main(void)
 			std::cout << "\nCtrl+D detected. Exiting cleanly.\n";
 			exit(0);
 		}
-		if (std::cin.fail())
+		if (std::cin.fail()) // eof 
 		{
-			std::cin.clear();
+			std::cin.clear(); // clear error buffer
+			// Clearing the input buffer to ignore the leftover newline character
 			std::cin.ignore(1000, '\n');
 			std::cout << "ERROR Input failed.\n";
 			continue;
@@ -80,7 +81,7 @@ int	main(void)
 			
 			tel = get_value("Enter your Phone Number: "); 
 
-			Contact contact(name, l_name, nickname, tel, "hah", ++count);
+			Contact contact(name, l_name, nickname, tel, "********", ++count);
 
 			phonebook.add(contact, count);
 			continue ;
@@ -97,3 +98,13 @@ int	main(void)
 	}
 	return (0);
 }
+
+/* 
+	1. define class
+	2. instnciate obj
+	3. declare as private member
+	4. getter
+	5. init value in constructor
+	6. define constructor
+	7. user intract with getLine
+*/

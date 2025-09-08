@@ -12,6 +12,5 @@ class Zombie
 		~Zombie();
 		void announce( void );
 };
-	
 
 #endif

@@ -13,6 +13,9 @@ $(NAME) : $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "✅ successfully created 🏗️!"
 
+%.o:%.cpp
+	$(CC) $(FLAGS) -c $< -o $@
+	@echo "Objects successfully created ✅"
 clean :
 	rm -f $(OBJ)
 

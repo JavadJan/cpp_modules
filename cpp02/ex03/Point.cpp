@@ -2,7 +2,7 @@
 
 Point::Point():x(0), y(0)
 {
-
+	std::cout << "\033[1;31mDefault constructor of point called, init x AND y to zero\033[0m" << std::endl;
 }
 Point::~Point()
 {

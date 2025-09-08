@@ -10,7 +10,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
-	@echo "successfully created !"
+	@echo "successfully created ✅✅✅"
+
+%.o:%.cpp
+	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
