@@ -1,4 +1,4 @@
-CC = g++
+CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 SRC = main.cpp Fixed.hpp Fixed.cpp Point.hpp Point.cpp bsp.cpp
@@ -13,6 +13,10 @@ $(NAME) : $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "✅ successfully created 🏗️ 🛠️!"
 
+%.o:%.cpp
+	$(CC) $(FLAGS) -c $< -o $@
+	@echo "successfully $@ is created ✅"
+	
 clean :
 	rm -f $(OBJ)
 

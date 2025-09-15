@@ -53,7 +53,7 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat(void) const
 {
-	// this devide the float e.g 
+	// this devide the float e.g 1 << 8 == 256
 	return ((float)this->fixed_point / (float)(1 << this->fractional));
 }
 
@@ -72,22 +72,29 @@ std::ostream    &operator<<(std::ostream &out, Fixed const &fixed)
 /* overloead: (obj /-+* obj)  */
 //Fixed(42) + Fixed(43)
 //Fixed(42.42) + Fixed(43.45)
+//Fixed c = a.operator*(b);
+/* 
+	for *:
+	step1: create frist object, becomes *this inside method
+	step2: pass object two
+
+*/
 Fixed Fixed::operator*(const Fixed &other) const
 {
-	// convert to fixed_point
+	// convert to fixed_point, call the Fixed(const float f);
 	return Fixed(this->toFloat() * other.toFloat());
 }
 Fixed Fixed::operator+(const Fixed &other) const
 {
-	return Fixed(this->toFloat() * other.toFloat());
+	return Fixed(this->toFloat() + other.toFloat());
 }
 Fixed Fixed::operator-(const Fixed &other) const
 {
-	return Fixed(this->toFloat() * other.toFloat());
+	return Fixed(this->toFloat() - other.toFloat());
 }
 Fixed Fixed::operator/(const Fixed &other) const
 {
-	return Fixed(this->toFloat() * other.toFloat());
+	return Fixed(this->toFloat() / other.toFloat());
 }
 
 /* < != > =< >= ==*/
@@ -147,7 +154,7 @@ Fixed& Fixed::operator--() // return itself, it refer to itself
 }
 Fixed Fixed::operator++(int) // return itself, it refer to itself
 {
-	Fixed temp = *this;
+	Fixed temp = *this; // current then ++ and the return the current
 	this->fixed_point++;
 	return (temp);
 }

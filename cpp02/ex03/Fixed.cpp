@@ -15,6 +15,8 @@ Fixed::Fixed(const float f):fixed_point(0){
 	//std::cout << "Float constructor called\n";
 	// float can not be shifted e.g., round diese (5 * ( 2 ^ 8)) auf
 	this->fixed_point = roundf(f * (1 << this->fractional));
+	// std::cout << "Fixed Float Constructor called: " << this->fixed_point << std::endl;
+
 }
 
 Fixed::~Fixed(){
@@ -53,7 +55,7 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat(void) const
 {
-	// this devide the float e.g 
+	// this devide the float e.g 1 << 8 == 256
 	return ((float)this->fixed_point / (float)(1 << this->fractional));
 }
 
@@ -68,6 +70,8 @@ std::ostream    &operator<<(std::ostream &out, Fixed const &fixed)
 	//Send the result of fixed.toFloat() to the output stream out
 	return (out);
 }
+
+
 
 /* overloead: (obj /-+* obj)  */
 //Fixed(42) + Fixed(43)

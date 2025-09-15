@@ -10,8 +10,8 @@ class	Fixed
 		static const int fractional;
 	public:
 		Fixed();
-		Fixed(float f);
-		Fixed(int n);
+		Fixed(const float f);
+		Fixed(const int n);
 		//Fixed(Fixed& operator*(const Fixed& other));
 		~Fixed();
 		Fixed(const Fixed& other); // copy constructor

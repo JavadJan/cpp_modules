@@ -8,7 +8,7 @@ Fixed::Fixed():fixed_point(0){
 
 Fixed::Fixed(const int x):fixed_point(0){
 	std::cout << "Int constructor called\n";
-	this->fixed_point = x << this->fractional; // input * 256 == input * (2 ^ 8)
+	this->fixed_point = x << this->fractional; // 3 * 256 == input * (2 ^ 8)
 }
 
 Fixed::Fixed(const float f):fixed_point(0){
@@ -25,7 +25,7 @@ Fixed::Fixed(const Fixed& other)
 {
 	//this->fixed_point = other.fixed_point;
 	std::cout << "Copy constructor called\n";
-	*this = other;
+	*this = other; // here I used assigned constructor
 }
 
 Fixed& Fixed::operator= (const Fixed& other)
@@ -64,6 +64,9 @@ int Fixed::toInt(void) const
 
 std::ostream    &operator<<(std::ostream &out, Fixed const &fixed)
 {
+	//* std::cout << 5; send int to the stream
+	// std::ostream &operator<<(std::ostream &o, int value);
+	// 
 	out << fixed.toFloat();
 	//Send the result of fixed.toFloat() to the output stream out
 	return (out);

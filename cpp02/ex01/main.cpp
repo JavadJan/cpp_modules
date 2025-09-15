@@ -20,5 +20,27 @@ int	main(void)
 	return (0);
 }
 
-//a.operator+(b);
+// a.operator+(b);
 /* operator (std::cout , c); it should return an std::ostream */
+
+/*
+	when I call std::cout << 5; in fact I am calling the overload for int
+	std::ostream& operator<<(std::ostream& out, int value);
+
+	// stream: flow of data from input to output
+	std::cout << "hello" => I am saying take the string and push it into cout then
+	cout prints it int terminal
+
+	include <iostream> input/output stream, lead data to output with conveyor belt
+	characters one-by-one from program to the screan
+
+	<< is a binary operator, and it always take two parameter, the things on the left and the right
+	left: ostream
+	right: value
+	then compiler convert it to a function call
+
+	// So when the left side is an int, << means bit shift.
+	// When the left side is an ostream, << means send into the stream.
+
+
+*/	

@@ -10,8 +10,8 @@ class	Fixed
 		static const int fractional;
 	public:
 		Fixed();
-		Fixed(float f);
-		Fixed(int n);
+		Fixed(const float f);
+		Fixed(const int n);
 		~Fixed();
 		Fixed(const Fixed& other); // copy constructor
 		Fixed& operator = (const Fixed& other); //asignment constructor
@@ -21,6 +21,7 @@ class	Fixed
 		int toInt( void ) const;
 };	
 
+// this one is not member function
 std::ostream    &operator<<(std::ostream &o, Fixed const &fixed);
 
 #endif
