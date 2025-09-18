@@ -27,8 +27,8 @@ Point::Point(const Point& other):x(other.getX()), y(other.getY())
 	//std::cout << "\033[1;35mCopy constructor of point called,\033[0m" << std::endl;
 	//*this = other;
 }
-Fixed Point::getX() const  { return this->x; } // read only
-Fixed Point::getY() const { return this->y; }
+const Fixed& Point::getX() const  { return this->x; } // read only
+const Fixed& Point::getY() const { return this->y; }
 
 std::ostream &operator<<(std::ostream &cout, Point const &point)
 {
