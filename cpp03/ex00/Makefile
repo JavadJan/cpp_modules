@@ -1,7 +1,8 @@
-CC = g++
-FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CC = c++
+FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -I.
 
 SRC = main.cpp ClapTrap.cpp
+HEADER = ClapTrap.hpp
 
 NAME = claptrap
 OBJ = $(SRC:.cpp=.o)
@@ -9,9 +10,13 @@ OBJ = $(SRC:.cpp=.o)
 all : $(NAME)
 
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(HEADER)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "✅ successfully created 🏗️ 🛠️!"
+
+%.o:%.cpp
+	$(CC) $(FLAGS) -c $< -o $@
+	@echo "successfully $@ created ✅"
 
 clean :
 	rm -f $(OBJ)

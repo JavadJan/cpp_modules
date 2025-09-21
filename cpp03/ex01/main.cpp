@@ -21,7 +21,7 @@ int main() {
 
 
 	std::cout << "\033[33m\n--------------------------\n\n\033[0m";
-	//ScavTrap and will inherit the constructors and destructor from Clap-Trap.
+	//ScavTrap will inherit the constructors and destructor from Clap-Trap.
     //ScavTrap s1; // first base(ClapTrap) class construcotr run then ScavTrap run
 	//ScavTrap s1("Scavvy");
 
@@ -31,10 +31,10 @@ int main() {
 
 	//s1.guardGate();
 
-	std::cout << "\033[34mTESTConstructing\033[0m" << std::endl;
+	std::cout << "\033[34mTEST Constructing with after inheritance\033[0m" << std::endl;
 	ScavTrap c; // test without praram c == ScavTrap the name is empty
 	
-	std::cout << "\033[31m---------------------------------\033[0m" << std::endl;
+	std::cout << "\033[31m--------------     ---------------\033[0m" << std::endl;
 	std::cout << "\033[34mTesting Behavior without params construcotr: \033[0m" << std::endl;
 	c.attack("ClapTrap"); // c attck Claptrap, attack is also a Base memeber ScavTrap ;
 	c.beRepaired(22); // ScavTrap(this->name) repair and get hit_points += 22, but base class is running and base == ClapTrap.

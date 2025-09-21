@@ -29,10 +29,12 @@ int ClapTrap:: get_energy_points() const
 	std::cout << "getter for energy points called" << std::endl;
 	return this->energy_points;
 }
+
 int ClapTrap::get_attack_damage() const{
 	std::cout << "getter for attack damage called" << std::endl;
 	return this->attack_damage;
 }
+
 std::string ClapTrap::get_name() const
 {
 	std::cout << "getter for name called" << std::endl;
@@ -54,9 +56,9 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 
 void ClapTrap::attack(const std::string& target)
 {
+	//ClapTrap can’t do anything if it has no hit points or energy points left
 	if (this->energy_points <= 0 || this->hit_points <= 0)
     {
-		//ClapTrap can’t do anything if it has no hit points or energy points left
         std::cout << "\033[36mClapTrap " << this->name << " can't attack: no energy or dead.\033[0m" << std::endl;
         return;
     }
@@ -68,7 +70,7 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (this->hit_points <= 0)
+	if (this->energy_points <= 0 || this->hit_points <= 0)
     {
 		//ClapTrap can’t do anything if it has no hit points or energy points left
         std::cout << "ClapTrap " << this->name << " can't take damage: it is alread dead" << std::endl;

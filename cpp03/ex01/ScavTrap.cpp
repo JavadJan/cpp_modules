@@ -23,7 +23,7 @@ ScavTrap::~ScavTrap()
 	std::cout << "\033[35mDerived ScaveTrap deconstructor\033[0m" << std::endl;
 }
 /* copy constructor */
-ScavTrap::ScavTrap(const ScavTrap& other)
+ScavTrap::ScavTrap(const ScavTrap& other):ClapTrap(other) // call ClapTrap constructor
 {
 	std::cout << "ScavTrap copy constructor is called" << std::endl;
 	*this = other;
