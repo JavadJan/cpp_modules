@@ -4,14 +4,14 @@
 //• A constant grade required to execute it.
 //All these attributes are private, not protected.
 
-#ifndef Form_HPP
-#define Form_HPP
+#ifndef AForm_HPP
+#define AForm_HPP
 #include <iostream>
 
 
 class Bureaucrat;
 
-class Form{
+class AForm{
 	private:
 		const std::string name;
 		const int grade_signed;
@@ -19,11 +19,11 @@ class Form{
 		bool sign;
 	public: 
 		/* constructors */
-		Form(); // do we nead?
-		~Form();
-		Form(const std::string &name, const int grade_signed, const int grade_exe);
-		Form(const Form& other);
-		Form& operator=(const Form& other);
+		AForm(); // do we nead?
+		virtual ~AForm();
+		AForm(const std::string &name, const int grade_signed, const int grade_exe);
+		AForm(const AForm& other);
+		AForm& operator=(const AForm& other);
 
 		/* getters */
 		std::string getName() const;
@@ -33,6 +33,7 @@ class Form{
 
 		/* behavies */
 		void beSigned(Bureaucrat &b);
+		virtual void execute(Bureaucrat const & executor) const = 0;
 
 		/* derived exception class && throw */
 		class GradeTooHighException : public std::exception
@@ -48,6 +49,6 @@ class Form{
 };
 
 
-std::ostream &operator<<(std::ostream &o, Form const &form);
+std::ostream &operator<<(std::ostream &o, AForm const &AForm);
 
 #endif

@@ -16,7 +16,7 @@ Bureaucrat::~Bureaucrat()
 {
 	std::cout << "\033[1;34mCalled Bureaucrat destructor\033[0m" << std::endl;
 }
-Bureaucrat::Bureaucrat(std::string name, int grade): name(name)// because the name is constant it should init in initilazer
+Bureaucrat::Bureaucrat(const std::string &name,const int grade): name(name)// because the name is constant it should init in initilazer
 {
 	std::cout << "\033[1;34mCalled Bureaucrat constructor with param: " << grade << "\033[0m" << std::endl;
 	if (grade > this->gradeLimits.max)

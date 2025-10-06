@@ -1,9 +1,11 @@
 #include "../include/Bureaucrat.hpp"
+#include "../include/AForm.hpp"
 
 t_grade Bureaucrat::gradeLimits = {1, 150};
-//----------------------------------------------------#
+
+// ---------------------------------------------------#
 //                                                    #
-//                    constructor                     #
+//                 Constructor                        #
 //                                                    #
 //----------------------------------------------------#
 Bureaucrat::Bureaucrat()
@@ -14,35 +16,26 @@ Bureaucrat::~Bureaucrat()
 {
 	std::cout << "\033[1;34mCalled Bureaucrat destructor\033[0m" << std::endl;
 }
-Bureaucrat::Bureaucrat(const std::string &name,const int grade): name(name)// because the name is constant it should init in initilazer
+Bureaucrat::Bureaucrat(const std::string &name, const int grade): name(name)// because the name is constant it should init in initilazer
 {
 	std::cout << "\033[1;34mCalled Bureaucrat constructor with param: " << grade << "\033[0m" << std::endl;
 	if (grade > this->gradeLimits.max)
 	{
-		throw GradeTooLowException();
+		throw GradeTooHighException();
 	}
 	else if (grade < this->gradeLimits.min)
 	{
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	}
 	this->grade = grade;
 	//std::cout << *this;
-	//try
-	//{
-	//}
-	//catch(const std::exception& e)
-	//{
-	//	std::cout << "Invalid Grade: " << grade << e.what() << '\n';
-	//}
 }
 /* 
-	⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 	You throw, but you also catch immediately inside.
 	
 	That means the exception is handled right there, and construction continues.
 	
 	So the constructor finishes successfully → you end up with a Bureaucrat object.
-	⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 */
 Bureaucrat::Bureaucrat(const Bureaucrat &other):name(other.name),grade(other.grade)
 {
@@ -54,13 +47,13 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 	if (this != &other)
 	{
 		this->grade = other.grade;
-		//this->name = other.name; // name can not assign because this is constant
 	}
 	return (*this);
 }
-//----------------------------------------------------#
+
+// ---------------------------------------------------#
 //                                                    #
-//                    getters                         #
+//                     getters                        #
 //                                                    #
 //----------------------------------------------------#
 std::string Bureaucrat::getName() const
@@ -74,44 +67,39 @@ int	Bureaucrat::getGrade(void) const
 
 //If the grade goes out of range, both functions must throw the same exceptions as the
 //constructor.
-//----------------------------------------------------#
+// ---------------------------------------------------#
 //                                                    #
-//                    behaviour                       #
+//                   Behaviour                        #
 //                                                    #
 //----------------------------------------------------#
 void	Bureaucrat::incrementBureaucrat(void)
 {
-	//try
-	//{
-		if (this->grade <= 1)
-			throw GradeTooLowException();
-		--grade;
-		std::cout << this->name << " promoted congragulation 🥳 " << this->grade << std::endl;
-	//}
-	//catch(const std::exception& e)
-	//{
-	//	std::cout << "Invalid promotion: " << this->grade - 1 << e.what() << '\n';
-	//}
-	
+	if (this->grade <= 1)
+		throw GradeTooLowException();
+	--grade;
+	std::cout << this->name << " promoted congragulation 🥳 " << this->grade << std::endl;
 }
 void	Bureaucrat::decreamentBureaucrat(void)
 {
-	//try
-	//{
-		if (grade >= 150)
-			throw GradeTooHighException();
-		++grade;  // grade goes down in rank
-		std::cout << this->name << " demoted " << this->grade << std::endl;
-	//}
-	//catch(const std::exception& e)
-	//{
-	//	std::cout << "Invalid demotion: " << this->grade + 1 << e.what() << '\n';
-	//}
-	
+	if (grade >= 150)
+		throw GradeTooHighException();
+	++grade;  // grade goes down in rank
+	std::cout << this->name << " demoted " << this->grade << std::endl;	
 }
-//----------------------------------------------------#
+void Bureaucrat::signForm(AForm &f)
+{
+    try {
+        f.beSigned(*this); // Try to sign the form
+        std::cout << this->name << " signed " << f.getName() << std::endl;
+    } catch (std::exception &e) {
+        std::cout << this->name << " couldn’t sign " << f.getName()
+                  << " because " << e.what() << std::endl;
+    }
+}
+
+// ---------------------------------------------------#
 //                                                    #
-//                    rewrite what()                  #
+//                 Exception                          #
 //                                                    #
 //----------------------------------------------------#
 const char* Bureaucrat::GradeTooHighException::what() const throw() 
@@ -124,9 +112,9 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
     return " Grade is out of range (Too Low)";
 }
 
-//----------------------------------------------------#
+// ---------------------------------------------------#
 //                                                    #
-//                    overload <<                     #
+//                 insertion                          #
 //                                                    #
 //----------------------------------------------------#
 std::ostream &operator<<(std::ostream &o, Bureaucrat const &bu)

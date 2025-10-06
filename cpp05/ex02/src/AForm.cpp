@@ -1,4 +1,4 @@
-#include "../include/Form.hpp"
+#include "../include/AForm.hpp"
 #include "../include/Bureaucrat.hpp"
 
 
@@ -7,22 +7,22 @@
 //                 Constructor                        #
 //                                                    #
 //----------------------------------------------------#
-Form::Form()
+AForm::AForm()
 : name("default")      // or any default string
 , grade_signed(0)      // must give a value
 , grade_exe(0)         // must give a value
 , sign(false)
 {
-	std::cout << "\033[1;33mCalled Form default constructor\033[0m" << std::endl;
+	std::cout << "\033[1;33mCalled AForm default constructor\033[0m" << std::endl;
 }
 
-Form::Form(const std::string &name,const int grade_signed,const int grade_exe)
+AForm::AForm(const std::string &name,const  int grade_signed,const  int grade_exe)
 : name(name)
 , grade_signed(grade_signed)
 , grade_exe(grade_exe)
 , sign(false)
 {
-    std::cout << "\033[1;33mCalled Form params constructor\033[0m" << std::endl;
+    std::cout << "\033[1;33mCalled AForm params constructor\033[0m" << std::endl;
 	if (grade_exe < 1)
 		throw GradeTooHighException();
 	if (grade_signed < 1)
@@ -32,18 +32,19 @@ Form::Form(const std::string &name,const int grade_signed,const int grade_exe)
 		throw GradeTooLowException();
 	if (grade_signed > 150)
 		throw GradeTooLowException(); // 150 is lower than 1
+	//std::cout << *this;	
 }
 
-Form::Form(const Form& other)
+AForm::AForm(const AForm& other)
 :name(other.name)
 , grade_signed(other.grade_signed)
 , grade_exe(other.grade_exe)
 , sign(other.sign)
 {
-	std::cout << "\033[1;33mCalled Form copy constructor\033[0m" << std::endl;
+	std::cout << "\033[1;33mCalled AForm copy constructor\033[0m" << std::endl;
 }
 
-Form& Form::operator=(const Form& other) // attribute are const, can be assign
+AForm& AForm::operator=(const AForm& other) // attribute are const, can be assign
 {
 	std::cout << "\033[1;33mCalled assigned overload oparator\033[0m" << std::endl;
 	if (this != &other)
@@ -54,9 +55,9 @@ Form& Form::operator=(const Form& other) // attribute are const, can be assign
 	return (*this);
 }
 
-Form::~Form()
+AForm::~AForm()
 {
-	std::cout << "\033[1;33mCalled Form destructor\033[0m" << std::endl;
+	std::cout << "\033[1;33mCalled AForm destructor\033[0m" << std::endl;
 }
 
 
@@ -67,12 +68,12 @@ Form::~Form()
                                                       # 
    ~~~~~~~~~~~~~~~~~~~~ Exceptions ~~~~~~~~~~~~~~~~~~~#
 */
-const char* Form::GradeTooHighException::what() const throw()
+const char* AForm::GradeTooHighException::what() const throw()
 {
 	return ("Grade is out of range (Too High)");
 }
 
-const char* Form::GradeTooLowException::what() const throw()
+const char* AForm::GradeTooLowException::what() const throw()
 {
 	return ("Grade is out of range (Too Low)");
 }
@@ -81,20 +82,20 @@ const char* Form::GradeTooLowException::what() const throw()
 //                    getters                         #
 //                                                    #
 //----------------------------------------------------#
-std::string Form::getName() const
+std::string AForm::getName() const
 {
 	return (this->name);
 }
-int Form::getGradeSigned() const
+int AForm::getGradeSigned() const
 {
 	return (this->grade_signed);
 }
 
-int Form::getGradeExe() const
+int AForm::getGradeExe() const
 {
 	return (this->grade_exe);
 }
-bool Form::getSigend() const
+bool AForm::getSigend() const
 {
 	return (this->sign);
 }
@@ -104,9 +105,9 @@ bool Form::getSigend() const
 //                                                    #
 //----------------------------------------------------#
 
-void Form::beSigned(Bureaucrat &b)
+void AForm::beSigned(Bureaucrat &b)
 {
-	if (b.getGrade() <= this->grade_exe) // if person has grade 1 then can sign form with grade 2
+	if (b.getGrade() <= this->grade_exe) // if person has grade 1 then can sign AForm with grade 2
 	{// person with grade 2 can not sign form with grade 1
 		this->sign = true;
 		//b.signForm(*this); // A person sign a form and form.sign => true
@@ -122,11 +123,11 @@ void Form::beSigned(Bureaucrat &b)
 //                    Overload                        #
 //                                                    #
 //----------------------------------------------------#
-std::ostream& operator<<(std::ostream& os, Form const &form)
+std::ostream& operator<<(std::ostream& os, AForm const &form)
 {
 	os << form.getName() 
 		<< ", grade sign " << form.getGradeSigned() 
 		<< " grade execution " << form.getGradeExe()
-		<< " signed= " << (form.getSigend() ? "true" : "false") << '\n';
+		<< " signed=" << (form.getSigend() ? "true" : "false") << '\n';
 	return (os);
 }

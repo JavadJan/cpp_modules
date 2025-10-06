@@ -6,6 +6,7 @@ int main()
 	try
 	{
 		Bureaucrat b("javad",-1);
+		std::cout << b << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -17,6 +18,7 @@ int main()
 	try
 	{
 		Bureaucrat a("Alex", 151);
+		std::cout << a << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -25,10 +27,11 @@ int main()
 	//std::cout << a;
 	
 	//std::cout << "\033[1;31m\n\n[TEST 3:] Too Low\033[0m" << std::endl;
-	std::cout << "\033[1;31m\n\n[TEST 5:] decreament Bureaucrat \033[0m" << std::endl;
+	std::cout << "\033[1;31m\n\n[TEST 3:] decreament Bureaucrat \033[0m" << std::endl;
 	try
 	{
 		Bureaucrat c("Babbe",149);
+		std::cout << c << std::endl;
 		c.decreamentBureaucrat();
 		c.decreamentBureaucrat();
 	}
