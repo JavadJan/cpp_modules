@@ -1,42 +1,121 @@
-#include "../include/Bureaucrat.hpp"
 #include "../include/AForm.hpp"
+#include "../include/Bureaucrat.hpp"
+#include "../include/PresidentialPardonForm.hpp"
+#include "../include/RobotomyRequestForm.hpp"
 #include "../include/ShrubberyCreationForm.hpp"
 
-int main()
+//#define not_sign 1
+//#define ROBOT 1
+//#define SHRUBBERY 1
+//#define LEAK 1
+//#define ROBOT_TRUE 1
+//#define PRESINTIAL 1
+enum	TestCase
 {
-	
+	NOT_SIGNED,
+	ROBOT,
+	SHRUBBERY,
+	LEAK,
+	ROBOT_TRUE,
+	PRESIDENTIAL
+};
+
+int	main(void)
+{
+	TestCase			TEST;
+
+	TEST = NOT_SIGNED;
 	std::cout << "\033[1;31m\n\n[TEST 1:] test sign form: \033[0m" << std::endl;
 	try
 	{
-		//Bureaucrat alice("Alice", 5);
 		Bureaucrat bob("Bob", 100);
 		std::cout << bob << std::endl;
-		
-		Bureaucrat alice("Alice", 100);
+		Bureaucrat alice("Alice", 147);
 		std::cout << alice << std::endl;
 		std::cout << std::endl;
+		ShrubberyCreationForm tree("home");
+		std::cout << std::endl;
 
-    	ShrubberyCreationForm tree("home");
-		std::cout << std::endl;
-		//std::cout << tree;
-		
-		std::cout << "alice signs it " << std::endl;
-    	tree.beSigned(alice);   // Alice signs it
-
-		std::cout << std::endl;
-		std::cout << std::endl;
-    	tree.execute(alice); 
+		switch (TEST)
+		{
+		case NOT_SIGNED:
+		{
+			std::cout << "\n\nfirst test with someone who did not sighned!" << std::endl;
+			Bureaucrat not_sigend("no_sign", 149);
+			not_sigend.signForm(tree);
+			not_sigend.executeForm(tree);
+			std::cout << std::endl;
+			break ;
+		}
+		case ROBOT:{
+			std::cout << "\033[1;35m\n\n[TEST] without leaks\033[0m" << std::endl;
+			Bureaucrat rob("rob", 100);
+			RobotomyRequestForm rr("robot");
+			std::cout << rr << std::endl;
+			rob.signForm(rr);
+			rob.executeForm(rr);
+			break ;
+		}
+		case SHRUBBERY:
+		{
+			std::cout << "\033[1;35m[TEST]alice can not sign tree but bob can \033[0m" << std::endl;
+			bob.signForm(tree); // Alice signs it
+			bob.executeForm(tree);
+			std::cout << std::endl;
+			std::cout << "\033[1;35m[TEST]it is turned to Alice: \033[0m" << std::endl;
+			alice.signForm(tree); // Alice signs it
+			alice.executeForm(tree);
+			// here when alice.grade > tree.grade them destroy all object are created in this scope then go to the catch
+			std::cout << std::endl;
+			std::cout << std::endl;
+			break ;
+		}
+			/* code */
+		case LEAK:{
+			std::cout << "\033[1;35m\n\n[TEST] robotmyRequest: \033[0m" << std::endl;
+			Bureaucrat			*robot = new Bureaucrat("robot", 100);
+			RobotomyRequestForm	*r = new RobotomyRequestForm("robot");
+			std::cout << *r << std::endl;
+			robot->signForm(*r);
+			robot->executeForm(*r);
+			delete robot;
+			delete r;
+			break ;
+		}
+		case ROBOT_TRUE:{
+			std::cout << "\033[1;35m\n\n[TEST] without leaks true to exe\033[0m" << std::endl;
+			Bureaucrat rob_true("rob_true", 45);
+			RobotomyRequestForm rr("robot");
+			std::cout << rr << std::endl;
+			rob_true.signForm(rr);
+			rob_true.executeForm(rr);
+			break ;
+		}
+		case PRESIDENTIAL:{
+			std::cout << "\033[1;35m\n\n[TEST] Presidential\033[0m" << std::endl;
+			Bureaucrat pres("JAVAD", 1);
+			std::cout << pres << std::endl;
+			PresidentialPardonForm pres_form("piece");
+			std::cout << pres_form;
+			pres.signForm(pres_form);
+			std::cout << std::endl;
+			pres.executeForm(pres_form);
+			std::cout << std::endl;
+			break ;
+		}
+		default:
+			break ;
+		}
 	}
-	catch(const std::exception& e)
+	catch (const std::exception &e)
 	{
 		std::cout << "Invalid Grade: " << e.what() << '\n';
 	}
-	
-
 }
 
 /* don't catch exception inside the constructor because if cause to finish the constructor
-	and creation object happen, how you get that the creation happen? because destructor happen
+	and creation object happen,
+		how you get that the creation happen? because destructor happen
 
 	[TEST:]
 	step 0: create an object
@@ -52,5 +131,5 @@ int main()
 	bureaucrat.signForm(form): Simulates the bureaucrat’s action of trying to sign a form.
 
 	form.beSigned(bureaucrat): Simulates the form’s internal
- 	logic to verify if the bureaucrat has enough grade to sign it
+	logic to verify if the bureaucrat has enough grade to sign it
 */

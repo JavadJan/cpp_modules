@@ -31,6 +31,7 @@ class Bureaucrat{
 		void incrementBureaucrat();
 		void decreamentBureaucrat(); // it is static, because this func access to the static the var
 		//void signForm(Form &f);
+		void executeForm(AForm const &form);
 
 		/* derived exception class */
 		class GradeTooHighException : public std::exception

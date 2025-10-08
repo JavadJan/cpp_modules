@@ -1,4 +1,4 @@
-CC  	= g++
+CC  	= c++
 FLAG = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 App	= Application/

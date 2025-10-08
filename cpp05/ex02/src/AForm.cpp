@@ -24,14 +24,22 @@ AForm::AForm(const std::string &name,const  int grade_signed,const  int grade_ex
 {
     std::cout << "\033[1;33mCalled AForm params constructor\033[0m" << std::endl;
 	if (grade_exe < 1)
-		throw GradeTooHighException();
+	{
+		throw GradeTooHighException(name, grade_exe);
+	}
 	if (grade_signed < 1)
-		throw GradeTooHighException();
+	{
+		throw GradeTooHighException(name, grade_signed);
+	}
 
 	if (grade_exe > 150)
-		throw GradeTooLowException();
+	{
+		throw GradeTooLowException(name, grade_exe);
+	}
 	if (grade_signed > 150)
-		throw GradeTooLowException(); // 150 is lower than 1
+	{
+		throw GradeTooLowException(name, grade_signed); // 150 is lower than 1
+	}
 	//std::cout << *this;	
 }
 
@@ -68,14 +76,48 @@ AForm::~AForm()
                                                       # 
    ~~~~~~~~~~~~~~~~~~~~ Exceptions ~~~~~~~~~~~~~~~~~~~#
 */
+AForm::GradeTooHighException::GradeTooHighException(const std::string &name, int grade)
+{
+	std::stringstream ss;
+    ss << grade;           // insert the int into the stringstream
+    std::string str_grade = ss.str();
+	err_msg = name + "': grade too high (" + str_grade + ")";
+}
+
+AForm::GradeTooLowException::GradeTooLowException(const std::string &name, int grade)
+{
+	std::stringstream ss;
+    ss << grade;           // insert the int into the stringstream
+    std::string str_grade = ss.str();
+	err_msg = name + "': grade too high (" + str_grade + ")";
+}
 const char* AForm::GradeTooHighException::what() const throw()
 {
-	return ("Grade is out of range (Too High)");
+	return (err_msg.c_str()); // convert std::string to the const char*
 }
 
 const char* AForm::GradeTooLowException::what() const throw()
 {
-	return ("Grade is out of range (Too Low)");
+	return (err_msg.c_str());
+}
+AForm::GradeTooLowException::~GradeTooLowException() throw()
+{
+	std::cout << "\033[1;31m Called GradeTooHighException destructor\033[0m" << std::endl;
+}
+AForm::GradeTooHighException::~GradeTooHighException() throw()
+{
+	std::cout << "\033[1;31m Called GradeTooLowException destructor\033[0m" << std::endl;	
+}
+
+AForm::NotSignedException::NotSignedException(std::string const &nameBu)
+    : err_signed(nameBu + " \033[31mdid not signed the Form\033[0m") {}
+const char *AForm::NotSignedException::what() const throw()
+{
+	return (this->err_signed.c_str());
+}
+AForm::NotSignedException::~NotSignedException() throw()
+{
+	std::cout << "\033[1;31m Called NotSignedEception destructor\033[0m" << std::endl;	
 }
 //----------------------------------------------------#
 //                                                    #
@@ -114,8 +156,14 @@ void AForm::beSigned(Bureaucrat &b)
 	}
 	else
 	{
-		throw GradeTooLowException(); // not qualified to sign
+		throw GradeTooLowException(b.getName(), b.getGrade()); // not qualified to sign
 	}
+}
+void AForm::checkExecution(Bureaucrat const &executor) const {
+    if (!this->sign)
+        throw NotSignedException(this->name);
+    if (executor.getGrade() > this->grade_exe)
+        throw GradeTooLowException(executor.getName(), executor.getGrade());
 }
 
 //----------------------------------------------------#

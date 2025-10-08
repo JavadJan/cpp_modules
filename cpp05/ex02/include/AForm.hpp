@@ -7,7 +7,8 @@
 #ifndef AForm_HPP
 #define AForm_HPP
 #include <iostream>
-
+#include <string>
+#include <sstream>
 
 class Bureaucrat;
 
@@ -34,16 +35,34 @@ class AForm{
 		/* behavies */
 		void beSigned(Bureaucrat &b);
 		virtual void execute(Bureaucrat const & executor) const = 0;
-
+		void checkExecution(Bureaucrat const &executor) const;
 		/* derived exception class && throw */
 		class GradeTooHighException : public std::exception
 		{
+			private:
+				std::string err_msg;
 			public:
+				GradeTooHighException(const std::string &name, int grade);
+				virtual ~GradeTooHighException() throw();
 				const char* what() const throw();
 		};
 		class GradeTooLowException : public std::exception
 		{
+			private:
+				std::string err_msg;
 			public:
+				GradeTooLowException(const std::string &name, int grade);
+				virtual ~GradeTooLowException() throw();
+				const char* what() const throw();
+		};
+
+		class NotSignedException : public std::exception
+		{
+			private:
+				std::string err_signed;
+			public:
+				NotSignedException(std::string const &nameBu);
+				virtual ~NotSignedException() throw();
 				const char* what() const throw();
 		};
 };

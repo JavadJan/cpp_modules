@@ -1,14 +1,16 @@
 CC = c++
-FLAGS = -Wall -Wextra -Werror -Iinclude
+FLAGS = -Wall -Wextra -Werror -Iinclude -std=c++98
 
 H = include/
-HEADER = $(H)Bureaucrat.hpp $(H)AForm.hpp $(H)ShrubberyCreationForm.hpp
+HEADER = $(H)Bureaucrat.hpp $(H)AForm.hpp $(H)ShrubberyCreationForm.hpp\
+		$(H)RobotomyRequestForm.hpp $(H)PresidentialPardonForm.hpp
 
 SRC_F = src/
 
 OBJ_F = obj/
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp\
+	RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

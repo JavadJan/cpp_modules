@@ -1,5 +1,5 @@
 CC = c++
-FLAGS = -Wall -Wextra -Werror -Iinclude
+FLAGS = -Wall -Wextra -Werror -Iinclude -std=c++98
 
 H = include/
 HEADER = $(H)Bureaucrat.hpp $(H)Form.hpp

@@ -14,7 +14,7 @@ Bureaucrat::Bureaucrat()
 }
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "\033[1;34mCalled Bureaucrat destructor\033[0m" << std::endl;
+	std::cout << "\033[1;34mCalled Bureaucrat("<< name << ") destructor\033[0m" << std::endl;
 }
 Bureaucrat::Bureaucrat(const std::string &name, const int grade): name(name)// because the name is constant it should init in initilazer
 {
@@ -93,6 +93,18 @@ void Bureaucrat::signForm(AForm &f)
         std::cout << this->name << " signed " << f.getName() << std::endl;
     } catch (std::exception &e) {
         std::cout << this->name << " couldn’t sign " << f.getName()
+                  << " because " << e.what() << "->(" 
+				  << getGrade() <<  ">" << f.getGradeSigned() <<")" << std::endl;
+    }
+}
+
+void	Bureaucrat::executeForm(AForm const &form)
+{
+	try {
+        form.execute(*this); // Try to sign the form
+        //std::cout << this->name << " executed " << form.getName() << std::endl;
+    } catch (std::exception &e) {
+        std::cout << this->name << " couldn’t execute " << form.getName()
                   << " because " << e.what() << std::endl;
     }
 }
