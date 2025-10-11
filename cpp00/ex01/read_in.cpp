@@ -22,6 +22,7 @@ std::string get_value(std::string msg)
 				std::cout << "ERROR Input failed. Please try again.\n";
 				continue;
 			}
+			
 		}
 
 		if (value.empty())

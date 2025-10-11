@@ -12,7 +12,7 @@ int main()
 	return (0);
 }
 
-/*	GOAL: alloc memory n number block in heap 
+/*	GOAL: alloc memory n block in heap 
 	1. delete the memory
 	2. I used here the set
 	3. integer to string 

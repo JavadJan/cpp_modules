@@ -4,12 +4,6 @@
 #include "../include/RobotomyRequestForm.hpp"
 #include "../include/ShrubberyCreationForm.hpp"
 
-//#define not_sign 1
-//#define ROBOT 1
-//#define SHRUBBERY 1
-//#define LEAK 1
-//#define ROBOT_TRUE 1
-//#define PRESINTIAL 1
 enum	TestCase
 {
 	NOT_SIGNED,
@@ -25,15 +19,21 @@ int	main(void)
 	TestCase			TEST;
 
 	TEST = NOT_SIGNED;
+	AForm *ref;
+	// do its job
 	std::cout << "\033[1;31m\n\n[TEST 1:] test sign form: \033[0m" << std::endl;
 	try
 	{
+
 		Bureaucrat bob("Bob", 100);
 		std::cout << bob << std::endl;
+
 		Bureaucrat alice("Alice", 147);
 		std::cout << alice << std::endl;
+
 		std::cout << std::endl;
-		ShrubberyCreationForm tree("home");
+
+		ShrubberyCreationForm tree("home"); 
 		std::cout << std::endl;
 
 		switch (TEST)
@@ -47,6 +47,21 @@ int	main(void)
 			std::cout << std::endl;
 			break ;
 		}
+		case SHRUBBERY:
+		{
+			std::cout << "\033[1;35m[TEST]alice can not sign tree but bob can \033[0m" << std::endl;
+			bob.signForm(tree); // Alice signs it
+			bob.executeForm(tree);
+			std::cout << std::endl;
+
+			std::cout << "\033[1;35m[TEST]it is turned to Alice: \033[0m" << std::endl;
+			alice.signForm(tree); // Alice signs it
+			alice.executeForm(tree);
+			// here when alice.grade > tree.grade them destroy all object are created in this scope then go to the catch
+			std::cout << std::endl;
+			std::cout << std::endl;
+			break ;
+		}
 		case ROBOT:{
 			std::cout << "\033[1;35m\n\n[TEST] without leaks\033[0m" << std::endl;
 			Bureaucrat rob("rob", 100);
@@ -54,20 +69,6 @@ int	main(void)
 			std::cout << rr << std::endl;
 			rob.signForm(rr);
 			rob.executeForm(rr);
-			break ;
-		}
-		case SHRUBBERY:
-		{
-			std::cout << "\033[1;35m[TEST]alice can not sign tree but bob can \033[0m" << std::endl;
-			bob.signForm(tree); // Alice signs it
-			bob.executeForm(tree);
-			std::cout << std::endl;
-			std::cout << "\033[1;35m[TEST]it is turned to Alice: \033[0m" << std::endl;
-			alice.signForm(tree); // Alice signs it
-			alice.executeForm(tree);
-			// here when alice.grade > tree.grade them destroy all object are created in this scope then go to the catch
-			std::cout << std::endl;
-			std::cout << std::endl;
 			break ;
 		}
 			/* code */
@@ -81,6 +82,7 @@ int	main(void)
 			delete robot;
 			delete r;
 			break ;
+			// because if be throwen an Exception before to free memory then cause to mem leak
 		}
 		case ROBOT_TRUE:{
 			std::cout << "\033[1;35m\n\n[TEST] without leaks true to exe\033[0m" << std::endl;
