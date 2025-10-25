@@ -77,8 +77,8 @@ it is float
 base in float: 1 9
 char: Non-displayable
 int: 1
-float: 1.0f
-double: 1.0
+float: 1f
+double: 1
 
 ------------------------------------------------------------
 ./convert 1.000001f
@@ -113,7 +113,8 @@ double: 3.40282e+38
 ------------------------------------------------------------
 ./convert -1.7976931348623158e+308
 
-base in double: -inf 21
+came to double
+base in double: -1.79769e+308 21
 char: impossible
 int: impossible
 float: -inff
@@ -122,7 +123,8 @@ double: -1.79769e+308
 ------------------------------------------------------------
 ./convert +1.7976931348623158e+308
 
-base in double: inf 21
+came to double
+base in double: 1.79769e+308 21
 char: impossible
 int: impossible
 float: +inff
@@ -151,26 +153,42 @@ double: +inf
 ------------------------------------------------------------
 ./convert 1e-324
 
-Invalid Argument: 1e-324
+came to double
+base in double: 0 6
+char: Non-displayable
+int: 0
+float: 0.0f
+double: 0.0
 
 ------------------------------------------------------------
 ./convert 1e-46f
 
-Invalid Argument: 1e-46f
+it is float
+base in float: 0 6
+char: Non-displayable
+int: 0
+float: 0.0f
+double: 0.0
 
 ------------------------------------------------------------
 ./convert 1.17549e-38f
 
-Invalid Argument: 1.17549e-38f
+it is float
+base in float: 1.17549e-38 10
+char: Non-displayable
+int: 0
+float: 1.17549e-38f
+double: 1.17549e-38
 
 ------------------------------------------------------------
 ./convert -0.0
 
+came to double
 base in double: -0 1
 char: Non-displayable
 int: 0
-float: -0f
-double: -0
+float: -0.0f
+double: -0.0
 
 ------------------------------------------------------------
 ./convert 31
@@ -207,6 +225,8 @@ double: 2.14748e+09.0
 ------------------------------------------------------------
 ./convert -2147483648
 
+came to double
+base in double: -2.14748e+09 11
 char: impossible
 int: -2147483648
 float: -2.14748e+09.0f
@@ -225,6 +245,7 @@ double: 1.234567
 ------------------------------------------------------------
 ./convert 1.2345678901234567
 
+came to double
 base in double: 1.23457 16
 char: Non-displayable
 int: 1
@@ -238,9 +259,173 @@ it is float
 base in float: 42 2
 char: '*'
 int: 42
-float: 42.0.0f
-double: 42.0.0
+float: 42.0f
+double: 42.0
 
 ------------------------------------------------------------
-All tests finished at Sat 25 Oct 2025 11:42:08 AM CEST
+./convert 1.23
+
+came to double
+base in double: 1.23 2
+char: Non-displayable
+int: 1
+float: 1.23f
+double: 1.23
+
+------------------------------------------------------------
+./convert -0.5
+
+came to double
+base in double: -0.5 1
+char: Non-displayable
+int: 0
+float: -0.5f
+double: -0.5
+
+------------------------------------------------------------
+./convert 3e10
+
+Invalid Argument: 3e10
+
+------------------------------------------------------------
+./convert 1e-324
+
+came to double
+base in double: 0 6
+char: Non-displayable
+int: 0
+float: 0.0f
+double: 0.0
+
+------------------------------------------------------------
+./convert .5
+
+came to double
+base in double: 0.5 1
+char: Non-displayable
+int: 0
+float: 0.5f
+double: 0.5
+
+------------------------------------------------------------
+./convert 2.
+
+came to double
+base in double: 2 0
+char: Non-displayable
+int: 2
+float: 2.0f
+double: 2.0
+
+------------------------------------------------------------
+./convert +4.2E+3
+
+came to double
+base in double: 4200 4
+char: impossible
+int: 4200
+float: 4200.0f
+double: 4200.0
+
+------------------------------------------------------------
+./convert abc
+
+Invalid Argument: abc
+
+------------------------------------------------------------
+./convert 1e
+
+Invalid Argument: 1e
+
+------------------------------------------------------------
+./convert --1.2
+
+came to double
+Invalid Argument: --1.2
+
+------------------------------------------------------------
+./convert 1.23f
+
+it is float
+base in float: 1.23 3
+char: Non-displayable
+int: 1
+float: 1.23f
+double: 1.23
+
+------------------------------------------------------------
+./convert -3.4E+10F
+
+it is float
+base in float: -3.4e+10 6
+char: impossible
+int: impossible
+float: -33999998976.00000f
+double: -33999998976.00000
+
+------------------------------------------------------------
+./convert 1e-324f
+
+it is float
+base in float: 0 7
+char: Non-displayable
+int: 0
+float: 0.0f
+double: 0.0
+
+------------------------------------------------------------
+./convert .5f
+
+it is float
+base in float: 0.5 2
+char: Non-displayable
+int: 0
+float: 0.5f
+double: 0.5
+
+------------------------------------------------------------
+./convert 2.
+
+came to double
+base in double: 2 0
+char: Non-displayable
+int: 2
+float: 2.0f
+double: 2.0
+
+------------------------------------------------------------
+./convert --1.2f
+
+it is float
+Invalid Argument: --1.2f
+
+------------------------------------------------------------
+./convert d
+
+char :'d'
+int :100
+float :100.0f
+double :100.0
+
+------------------------------------------------------------
+./convert 1.2e
+
+came to double
+Invalid Argument: 1.2e
+
+------------------------------------------------------------
+./convert d
+
+char :'d'
+int :100
+float :100.0f
+double :100.0
+
+------------------------------------------------------------
+./convert abc
+
+Invalid Argument: abc
+
+------------------------------------------------------------
+All tests finished at Sat 25 Oct 2025 07:12:56 PM CEST
 ------------------------------------------------------------

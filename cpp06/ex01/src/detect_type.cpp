@@ -206,15 +206,6 @@ bool isDouble(const std::string &str)
                 i++; // skip sign after exponent
             continue;
         }
-		if ((c == 'e' || c == 'E') && !hasExp && hasDigits)
-		{
-			hasExp = true;
-			hasDigits = false;
-			if (i + 1 < str.size() && (str[i + 1] == '+' || str[i + 1] == '-'))
-				i++;
-			continue;
-		}
-
 
         // Any other character is invalid for a double
         return false;

@@ -49,8 +49,10 @@ bool	isPsoudo(const std::string &s);
 bool	isValid(const std::string &s);
 int 	isChar(const std::string &str, int len);
 int 	isInteger(const std::string &str, size_t len);
-int		isFloat(const std::string &str, size_t len, size_t dot);
-int 	isDouble(const std::string &str, size_t len, size_t dot);
+//int		isFloat(const std::string &str, size_t len, size_t dot);
+bool		isFloat(const std::string &str);
+//int 	isDouble(const std::string &str, size_t len, size_t dot);
+bool 	isDouble(const std::string &str);
 e_type	detectType(const std::string str, size_t len);
 
 void	Invalid(const std::string &s);

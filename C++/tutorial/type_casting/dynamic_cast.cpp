@@ -33,7 +33,7 @@ class Derived : public Base
 int	main(void)
 {
 	Base *b = new Derived();
-	std::cout << typeid(b).__is_function_p() << std::endl;
+	std::cout << typeid(b).name() << std::endl;
 }
 /* 
 	dynamic_cast<new_type> (expression)

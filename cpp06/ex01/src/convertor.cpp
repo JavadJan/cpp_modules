@@ -65,7 +65,6 @@ void	Float(const std::string &str)
 	long	n;
 
 	f = atof(str.substr(0, str.size() - 1).c_str());
-	size_t dot = str.find('.');
 
 	size_t pos = str.find('.');
 	size_t _pos = (pos == std::string::npos) ? 0 : str.length() - pos - 2;
@@ -100,7 +99,7 @@ void	Float(const std::string &str)
 		if (_pos <= 7)
 			std::cout << std::fixed << std::setprecision(_pos);
 		//std::cout << "float: " << static_cast<float>(f) << "f" << std::endl;
-		std::cout << "float: " << f << ((tolerance && dot ==std::string::npos) ? ".0f" : "f") << std::endl;;
+		std::cout << "float: " << f << (tolerance ? ".0f" : "f") << std::endl;;
 	}
 	
 	
@@ -111,7 +110,7 @@ void	Float(const std::string &str)
 	else
 	{
 		//std::cout << std::fixed << std::setprecision(tolerance);
-		std::cout << "double: " << static_cast<double>(f) << ((tolerance && dot ==std::string::npos) ? ".0" : "") << std::endl;
+		std::cout << "double: " << static_cast<double>(f) << (tolerance ? ".0" : "") << std::endl;
 	}
 }
 
@@ -123,8 +122,7 @@ void	Double(const std::string &str)
 	//size_t tolerance = (pos == std::string::npos) ? 0 : str.length() - pos - 1; // one for f
 	
 	f = atof(str.c_str());
-	bool	tolerance = std::fabs(f - static_cast<int>(f)) < 0.0000000000001;
-	std::cout << "base in double: " << f << " " << str.length() - pos - 1 << std::endl;
+	std::cout << "base in double: " << static_cast<float>(f) << " " << str.length() - pos - 1 << std::endl;
 	n = static_cast<long>(f);
 
 	/* CHAR */
@@ -154,7 +152,7 @@ void	Double(const std::string &str)
 	else
 	{
 		//std::cout << std::fixed << std::setprecision(tolerance);
-		std::cout << "float: " << static_cast<float>(f) << (tolerance ? ".0f" : "f") << std::endl;
+		std::cout << "float: " << static_cast<float>(f) << "f" << std::endl;
 	}
 
 	/* DOUBLE */
@@ -165,7 +163,7 @@ void	Double(const std::string &str)
 	else
 	{
 		//std::cout << std::fixed << std::setprecision(tolerance);
-		std::cout << "double: " << f << (tolerance ? ".0" : "") << std::endl;
+		std::cout << "double: " << f << std::endl;
 	}
 }
 
