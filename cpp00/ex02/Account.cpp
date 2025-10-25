@@ -60,7 +60,6 @@ void Account::_displayTimestamp()
 				<< std::setw(2) << std::setfill('0') << now->tm_min << ":"        
 					// Minute
 				<< std::setw(2) << std::setfill('0') << now->tm_sec << "\n";   
-				std::set  
 					// Second
 }
 
