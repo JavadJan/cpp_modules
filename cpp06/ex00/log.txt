@@ -101,6 +101,16 @@ float: -3.40282e+38f
 double: -3.40282e+38
 
 ------------------------------------------------------------
+./convert -3.40282e+39f
+
+it is float
+base in float: -inf 10
+char: impossible
+int: impossible
+float: -inff
+double: -inf
+
+------------------------------------------------------------
 ./convert +3.40282e+38f
 
 it is float
@@ -109,6 +119,16 @@ char: impossible
 int: impossible
 float: 3.40282e+38f
 double: 3.40282e+38
+
+------------------------------------------------------------
+./convert +3.40282e+39f
+
+it is float
+base in float: inf 10
+char: impossible
+int: impossible
+float: +inff
+double: +inf
 
 ------------------------------------------------------------
 ./convert -1.7976931348623158e+308
@@ -215,6 +235,14 @@ float: 128.0f
 double: 128.0
 
 ------------------------------------------------------------
+./convert 2147483647
+
+char: impossible
+int: 2147483647
+float: 2.14748e+09.0f
+double: 2.14748e+09.0
+
+------------------------------------------------------------
 ./convert 2147483648
 
 char: impossible
@@ -225,8 +253,6 @@ double: 2.14748e+09.0
 ------------------------------------------------------------
 ./convert -2147483648
 
-came to double
-base in double: -2.14748e+09 11
 char: impossible
 int: -2147483648
 float: -2.14748e+09.0f
@@ -285,7 +311,12 @@ double: -0.5
 ------------------------------------------------------------
 ./convert 3e10
 
-Invalid Argument: 3e10
+came to double
+base in double: 3e+10 4
+char: impossible
+int: impossible
+float: 3e+10f
+double: 3e+10
 
 ------------------------------------------------------------
 ./convert 1e-324
@@ -335,6 +366,7 @@ Invalid Argument: abc
 ------------------------------------------------------------
 ./convert 1e
 
+came to double
 Invalid Argument: 1e
 
 ------------------------------------------------------------
@@ -427,5 +459,5 @@ double :100.0
 Invalid Argument: abc
 
 ------------------------------------------------------------
-All tests finished at Sat 25 Oct 2025 07:12:56 PM CEST
+All tests finished at Thu 30 Oct 2025 12:40:08 PM CET
 ------------------------------------------------------------

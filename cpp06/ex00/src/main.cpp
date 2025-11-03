@@ -43,6 +43,27 @@ int main(int ac, char *argv[])
 	//std::cout <<"Integer: " << static_cast<int>(d) << std::endl;
 	//std::cout <<"float: " << static_cast<float>(d) << std::endl;
 	//std::cout << "\n\n\n";
-    ScalarConverter::convert(argv[1]);
+    ScalarConverter::convert(static_cast<std::string>(argv[1]));
     return 0;
 }
+
+/*./convert -1.7976931348623158e+308f
+
+	it is float
+	base in float: -inf 22
+	char: impossible
+	int: impossible
+	float: -inff ---------> first convert to -inf float
+	double: -inf ---------> then -inf convert to double
+
+	------------------------------------------------------------
+	./convert +1.7976931348623158e+308f
+
+	it is float
+	base in float: inf 22
+	char: impossible
+	int: impossible
+	float: +inff ----------> first convert to +int float
+	double: +inf ----------> then convert to +int float
+
+*/

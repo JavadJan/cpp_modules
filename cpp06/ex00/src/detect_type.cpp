@@ -260,47 +260,99 @@ bool	isValid(const std::string &s)
 	return (true);
 }
 
+//e_type	detectType(const std::string str, size_t len)
+//{
+//	std::size_t _dot = str.find('.');
+//	std::size_t _float = str.find('f');
+//	std::size_t _Float = str.find('F');
+//	std::size_t _exp = str.find_first_of("eE");
+//	std::size_t _plus = str.find('+');
+//	std::size_t _mines = str.find('-');
+//	bool plus_or_minus = _plus!= std::string::npos || _mines!= std::string::npos;
+//	bool f_or_F = (_float != std::string::npos || _Float != std::string::npos); //exist f/F
+//	bool f_or_F_and_dot = ((_float != std::string::npos || _Float != std::string::npos) && _dot != std::string::npos);
+//	bool f_or_F_and_e_and_minus_or_plus = (f_or_F) && (_exp) && (plus_or_minus);
+//	bool e_and_plus_or_minus = (_exp) && (plus_or_minus);
+
+//	//bool double_exp_nor_or_p_m = ((_exp != std::string::npos) && _exp + 1 > len) ? false : true;
+//	//if (str[j] == 'e' || str[j] == 'E') {
+//	//	if (j + 1 >= len) return 0; // no exponent part
+//	//	if (!(isdigit(str[j + 1]) || str[j + 1] == '+' || str[j + 1] == '-'))
+//	//		return 0;
+//	//}
+
+//	if (isPsoudo(str))
+//		return (SPECIAL);
+//	else if ((_dot == std::string::npos) && !e_and_plus_or_minus) // no dot
+//	{
+//		if (isChar(str, len))
+//			return (CHAR);
+//		if (isInteger(str, len))
+//			return (INT);
+//	}
+//	/* pares int */
+//	else if (f_or_F || f_or_F_and_dot || f_or_F_and_e_and_minus_or_plus)
+//	{
+//		std::cout << "it is float" << std::endl;
+//		//if (isFloat(str, len, _dot))
+//		if (isFloat(str))
+//		{
+//			return (FLOAT);
+//		}
+//	}
+//	else if ((_float == std::string::npos && _dot != std::string::npos)  || e_and_plus_or_minus)
+//	{
+//		std::cout << "came to double\n";
+//		//if (isDouble(str, len, _dot))
+//		if (isDouble(str))
+//			return (DOUBLE);
+//	}
+//	return (INVALID);
+//}
+
 e_type	detectType(const std::string str, size_t len)
 {
-	std::size_t _dot = str.find('.');
-	std::size_t _float = str.find('f');
-	std::size_t _Float = str.find('F');
-	std::size_t _exp = str.find('e');
-	std::size_t _plus = str.find('+');
-	std::size_t _mines = str.find('-');
-	bool plus_or_minus = _plus!= std::string::npos || _mines!= std::string::npos;
-	bool f_or_F = (_float != std::string::npos || _Float != std::string::npos); //exist f/F
-	bool f_or_F_and_dot = ((_float != std::string::npos || _Float != std::string::npos) && _dot != std::string::npos);
-	bool f_or_F_and_e_and_minus_or_plus = (f_or_F) && (_exp) && (plus_or_minus);
-	bool e_and_plus_or_minus = (_exp) && (plus_or_minus);
-	if (isPsoudo(str))
-		return (SPECIAL);
-	else if ((_dot == std::string::npos) && !e_and_plus_or_minus) // no dot
-	{
-		if (isChar(str, len))
-			return (CHAR);
-		if (isInteger(str, len))
-			return (INT);
-	}
-	/* pares int */
-	else if (f_or_F || f_or_F_and_dot || f_or_F_and_e_and_minus_or_plus)
-	{
-		std::cout << "it is float" << std::endl;
-		//if (isFloat(str, len, _dot))
-		if (isFloat(str))
-		{
-			return (FLOAT);
-		}
-	}
-	else if ((_float == std::string::npos && _dot != std::string::npos)  || e_and_plus_or_minus)
-	{
-		std::cout << "came to double\n";
-		//if (isDouble(str, len, _dot))
-		if (isDouble(str))
-			return (DOUBLE);
-	}
-	return (INVALID);
+    std::size_t _dot   = str.find('.');
+    std::size_t _float = str.find('f');
+    std::size_t _Float = str.find('F');
+    std::size_t _exp   = str.find_first_of("eE");
+    //std::size_t _plus  = str.find('+');
+    //std::size_t _minus = str.find('-');
+
+    bool f_or_F = (_float != std::string::npos || _Float != std::string::npos);
+    bool e_exists = (_exp != std::string::npos);
+
+    if (isPsoudo(str))
+        return SPECIAL;
+
+    // Integer or Char
+    if (_dot == std::string::npos && !e_exists && !f_or_F)
+    {
+        if (isChar(str, len))
+            return CHAR;
+        if (isInteger(str, len))
+            return INT;
+    }
+
+    // Float (with f/F at the end)
+    else if (f_or_F)
+    {
+        std::cout << "it is float" << std::endl;
+        if (isFloat(str))
+            return FLOAT;
+    }
+
+    // Double (has '.' or 'e'/'E' and no trailing 'f')
+    else if ((!f_or_F && (_dot != std::string::npos || e_exists)))
+    {
+        std::cout << "came to double" << std::endl;
+        if (isDouble(str))
+            return DOUBLE;
+    }
+
+    return INVALID;
 }
+
 
 /*
 (_exp != std::string::npos

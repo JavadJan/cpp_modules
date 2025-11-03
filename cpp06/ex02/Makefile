@@ -3,8 +3,10 @@ FLAGS = -Wall -Wextra -Werror -Iinclude -std=c++98
 
 
 H = include/
-HEADER = $(H)Data.hpp\
-		$(H)Serializer.hpp
+HEADER = $(H)Base.hpp\
+		$(H)B.hpp\
+		$(H)A.hpp\
+		$(H)C.hpp
 
 
 NAME = convert
@@ -12,7 +14,7 @@ NAME = convert
 OBJ_F = obj/
 SRC_F = src/
 
-SRC = main.cpp Serializer.cpp
+SRC = main.cpp Base.cpp generate.cpp 
 
 OBJ = $(SRC:.cpp=.o)
 

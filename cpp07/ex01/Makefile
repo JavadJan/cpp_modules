@@ -3,16 +3,15 @@ FLAGS = -Wall -Wextra -Werror -Iinclude -std=c++98
 
 
 H = include/
-HEADER = $(H)Data.hpp\
-		$(H)Serializer.hpp
+HEADER = $(H)Iter.hpp
 
 
-NAME = convert
+NAME = template
 
 OBJ_F = obj/
 SRC_F = src/
 
-SRC = main.cpp Serializer.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
