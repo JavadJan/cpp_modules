@@ -59,7 +59,11 @@ AForm* Intern::makeForm(const std::string &nameForm, const std::string &targetFo
 		"Presidential Pardon",
 		"Robotomy Request",
 	};
-	
+	//Each function returns a pointer to AForm.
+	//An array of 3 pointers to member functions of Intern.
+	//Each function takes a const std::string& and doesn’t modify the object (const).
+	//Initializing the array with addresses of member functions that create each specific form.
+	// int* A[3] = {1, 2, 3}
 	AForm* (Intern::*formCreator[3])(const std::string &target) const = {&Intern::makeShrubbery, &Intern::makePresidential, &Intern::makeRobotomy};
 	//2. target initialized to the second parameter.
 	for (int i = 0; i < 3; i++) {
