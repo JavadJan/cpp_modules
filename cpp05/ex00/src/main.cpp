@@ -53,7 +53,7 @@ int main()
 	}
 }
 
-/* don't catch exception inside the constructor because if cause to finish the constructor
+/* don't catch exception inside the constructor because it cause to finish the constructor
 	and creation object happen, how you get that the creation happen? because destructor happen
 
 

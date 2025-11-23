@@ -21,6 +21,7 @@ class Bureaucrat{
 		Bureaucrat& operator=(const Bureaucrat& other);
 		std::string getName() const;
 		int getGrade() const;
+		
 		void incrementBureaucrat();
 		void decreamentBureaucrat(); // it is static, because this func access to the static the var
 		class GradeTooHighException : public std::exception

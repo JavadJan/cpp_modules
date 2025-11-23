@@ -6,7 +6,7 @@
 template <typename T>
 class Stack{
 	private:
-		std::vector<T> data;
+		std::vector<T> data; // vector of any type can be, determin at compile-time
 	public:
 		void push(const T& value){data.push_back(value);}
 		void pop(){if(!data.empty()) data.pop_back();}
@@ -40,12 +40,12 @@ class Linklist{
         	head = newNode;
 		}
 		void print() const {
-        Node<T>* current = head;
-        while (current) {
-            std::cout << current->value << " -> ";
-            current = current->next;
-        }
-        std::cout << "null\n";
+			Node<T>* current = head;
+			while (current) {
+				std::cout << current->value << " -> ";
+				current = current->next;
+			}
+			std::cout << "null\n";
     	}
 };
 

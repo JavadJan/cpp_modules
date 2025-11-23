@@ -20,11 +20,11 @@ NAME = bureaucrat
 
 all : $(NAME)
 
-$(NAME): $(OBJ_P) $(HEADER)
+$(NAME): $(OBJ_P) 
 	$(CC) $(FLAGS) $(OBJ_P) -o $(NAME)
 	@echo "✅ successfully created 🏗️ 🛠️!"
 
-$(OBJ_F)%.o:$(SRC_F)%.cpp | $(OBJ_F)
+$(OBJ_F)%.o:$(SRC_F)%.cpp $(HEADER) | $(OBJ_F)
 	$(CC) $(FLAGS) -c $< -o $@
 	@echo "successfully $@ created ✅"
 
@@ -33,6 +33,7 @@ $(OBJ_F):
 
 clean :
 	rm -f $(OBJ_P)
+	rm -f home_shrubbery
 
 fclean : clean
 	rm -f $(NAME)

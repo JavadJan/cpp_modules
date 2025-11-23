@@ -81,23 +81,12 @@ const char* Form::GradeTooLowException::what() const throw()
 //                    getters                         #
 //                                                    #
 //----------------------------------------------------#
-std::string Form::getName() const
-{
-	return (this->name);
-}
-int Form::getGradeSigned() const
-{
-	return (this->grade_signed);
-}
+std::string Form::getName() const{return (this->name);}
+int Form::getGradeSigned() const {return (this->grade_signed);}
+int Form::getGradeExe() const{return (this->grade_exe);}
+bool Form::getSigend() const{return (this->sign);}
 
-int Form::getGradeExe() const
-{
-	return (this->grade_exe);
-}
-bool Form::getSigend() const
-{
-	return (this->sign);
-}
+
 //----------------------------------------------------#
 //                                                    #
 //                    behaves                         #
@@ -106,7 +95,7 @@ bool Form::getSigend() const
 
 void Form::beSigned(Bureaucrat &b)
 {
-	if (b.getGrade() <= this->grade_exe) // if person has grade 1 then can sign form with grade 2
+	if (b.getGrade() <= this->grade_signed) // if person has grade 1 then can sign form with grade 2
 	{// person with grade 2 can not sign form with grade 1
 		this->sign = true;
 		//b.signForm(*this); // A person sign a form and form.sign => true

@@ -67,58 +67,6 @@ AForm::~AForm()
 {
 	std::cout << "\033[1;33mCalled AForm destructor\033[0m" << std::endl;
 }
-
-
-/* ~~~~~~~~~~~~~~~~~~~~ Exceptions ~~~~~~~~~~~~~~~~~~~#
-													  # 
-                                                      # 
-                                                      # 
-                                                      # 
-   ~~~~~~~~~~~~~~~~~~~~ Exceptions ~~~~~~~~~~~~~~~~~~~#
-*/
-AForm::GradeTooHighException::GradeTooHighException(const std::string &name, int grade)
-{
-	std::stringstream ss;
-    ss << grade;           // insert the int into the stringstream
-    std::string str_grade = ss.str();
-	err_msg = name + "': grade too high (" + str_grade + ")";
-}
-
-AForm::GradeTooLowException::GradeTooLowException(const std::string &name, int grade)
-{
-	std::stringstream ss;
-    ss << grade;           // insert the int into the stringstream
-    std::string str_grade = ss.str();
-	err_msg = name + "': grade too high (" + str_grade + ")";
-}
-const char* AForm::GradeTooHighException::what() const throw()
-{
-	return (err_msg.c_str()); // convert std::string to the const char*
-}
-
-const char* AForm::GradeTooLowException::what() const throw()
-{
-	return (err_msg.c_str());
-}
-AForm::GradeTooLowException::~GradeTooLowException() throw()
-{
-	std::cout << "\033[1;31m Called GradeTooHighException destructor\033[0m" << std::endl;
-}
-AForm::GradeTooHighException::~GradeTooHighException() throw()
-{
-	std::cout << "\033[1;31m Called GradeTooLowException destructor\033[0m" << std::endl;	
-}
-
-AForm::NotSignedException::NotSignedException(std::string const &nameBu)
-    : err_signed(nameBu + " \033[31mdid not signed the Form\033[0m") {}
-const char *AForm::NotSignedException::what() const throw()
-{
-	return (this->err_signed.c_str());
-}
-AForm::NotSignedException::~NotSignedException() throw()
-{
-	std::cout << "\033[1;31m Called NotSignedEception destructor\033[0m" << std::endl;	
-}
 //----------------------------------------------------#
 //                                                    #
 //                    getters                         #
@@ -141,6 +89,67 @@ bool AForm::getSigend() const
 {
 	return (this->sign);
 }
+
+
+/* ~~~~~~~~~~~~~~~~~~~~ Exceptions ~~~~~~~~~~~~~~~~~~~#
+													  # 
+                                                      # 
+                                                      # 
+                                                      # 
+   ~~~~~~~~~~~~~~~~~~~~ Exceptions ~~~~~~~~~~~~~~~~~~~#
+*/
+AForm::GradeTooHighException::GradeTooHighException(const std::string &name, int grade)
+{
+	std::stringstream ss;
+    ss << grade;           // insert the int into the stringstream
+    std::string str_grade = ss.str();
+	err_msg = name + "': grade too high (" + str_grade + ")";
+}
+
+AForm::GradeTooLowException::GradeTooLowException(const std::string &name, int grade)
+{
+	std::stringstream ss;
+    ss << grade;           // insert the int into the stringstream
+    std::string str_grade = ss.str();
+	err_msg = name + "': grade too low (" + str_grade + ")";
+}
+const char* AForm::GradeTooHighException::what() const throw()
+{
+	return (err_msg.c_str()); // convert std::string to the const char*
+}
+
+const char* AForm::GradeTooLowException::what() const throw()
+{
+	return (err_msg.c_str());
+}
+AForm::GradeTooLowException::~GradeTooLowException() throw()
+{
+	std::cout << "\033[1;31m Called GradeTooHighException destructor\033[0m" << std::endl;
+}
+AForm::GradeTooHighException::~GradeTooHighException() throw()
+{
+	std::cout << "\033[1;31m Called GradeTooLowException destructor\033[0m" << std::endl;	
+}
+//----------------------------------------------------#
+//                                                    #
+//                    sign exception                  #
+//                                                    #
+//----------------------------------------------------#
+AForm::NotSignedException::NotSignedException(std::string const &nameBu)
+    : err_signed(nameBu + " \033[31mdid not signed the Form\033[0m") 
+{
+
+}
+
+const char *AForm::NotSignedException::what() const throw()
+{
+	return (this->err_signed.c_str());
+}
+AForm::NotSignedException::~NotSignedException() throw()
+{
+	std::cout << "\033[1;31m Called NotSignedEception destructor\033[0m" << std::endl;	
+}
+
 //----------------------------------------------------#
 //                                                    #
 //                    behaves                         #
@@ -149,10 +158,9 @@ bool AForm::getSigend() const
 
 void AForm::beSigned(Bureaucrat &b)
 {
-	if (b.getGrade() <= this->grade_exe) // if person has grade 1 then can sign AForm with grade 2
+	if (b.getGrade() <= this->grade_signed) // if person has grade 1 then can sign AForm with grade 2
 	{// person with grade 2 can not sign form with grade 1
 		this->sign = true;
-		//b.signForm(*this); // A person sign a form and form.sign => true
 	}
 	else
 	{
@@ -161,9 +169,12 @@ void AForm::beSigned(Bureaucrat &b)
 }
 void AForm::checkExecution(Bureaucrat const &executor) const {
     if (!this->sign)
+	{
         throw NotSignedException(this->name);
+
+	}
     if (executor.getGrade() > this->grade_exe)
-        throw GradeTooLowException(executor.getName(), executor.getGrade());
+    	throw GradeTooLowException(executor.getName(), executor.getGrade());
 }
 
 //----------------------------------------------------#

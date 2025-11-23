@@ -47,7 +47,7 @@ class Array{
 		{
 			return (this->_size);
 		}
-		T& operator[](size_t index)
+		T& operator[](size_t index) // for modifable
 		{
 			if (index >= size())
 			{
@@ -56,7 +56,15 @@ class Array{
 			/* Elements can be accessed through the subscript operator: [ ] */
 			return (elements[index]);
 		}
-
+		const T& operator[](size_t index) const // for read only
+		{
+			if (index >= size())
+			{
+				throw std::out_of_range("Index out of bounds"); // check bounds
+			}	
+			/* Elements can be accessed through the subscript operator: [ ] */
+			return (elements[index]);
+		}
 		void display()
 		{
 			for (unsigned int i = 0; i < _size; i++)

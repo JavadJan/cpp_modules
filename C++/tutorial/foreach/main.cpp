@@ -24,7 +24,7 @@ int main()
 	//	std::cout <<  arr[i]  << std::endl;
 	//}
 	int x = 10;
-	std::cout << "after refrence: " << x << '\n';
+	std::cout << "before refrence: " << x << '\n';
 
 	refrence(x);
 

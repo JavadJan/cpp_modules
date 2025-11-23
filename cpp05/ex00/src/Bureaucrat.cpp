@@ -81,32 +81,18 @@ int	Bureaucrat::getGrade(void) const
 //----------------------------------------------------#
 void	Bureaucrat::incrementBureaucrat(void)
 {
-	//try
-	//{
-		if (this->grade <= 1)
-			throw GradeTooLowException();
-		--grade;
-		std::cout << this->name << " promoted congragulation 🥳 " << this->grade << std::endl;
-	//}
-	//catch(const std::exception& e)
-	//{
-	//	std::cout << "Invalid promotion: " << this->grade - 1 << e.what() << '\n';
-	//}
-	
+
+	if (this->grade <= 1)
+		throw GradeTooHighException();
+	--grade;
+	std::cout << this->name << " promoted congragulation 🥳 " << this->grade << std::endl;	
 }
 void	Bureaucrat::decreamentBureaucrat(void)
 {
-	//try
-	//{
-		if (grade >= 150)
-			throw GradeTooHighException();
-		++grade;  // grade goes down in rank
-		std::cout << this->name << " demoted " << this->grade << std::endl;
-	//}
-	//catch(const std::exception& e)
-	//{
-	//	std::cout << "Invalid demotion: " << this->grade + 1 << e.what() << '\n';
-	//}
+	if (grade >= 150)
+		throw GradeTooLowException();
+	++grade;  // grade goes down in rank
+	std::cout << this->name << " demoted " << this->grade << std::endl;
 	
 }
 //----------------------------------------------------#

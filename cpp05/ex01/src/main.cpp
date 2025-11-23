@@ -35,7 +35,9 @@ int main()
 		
 		Form contract("TopSecretContract", 50 , 50);
 		std::cout << contract << std::endl;
+		
 		alice.signForm(contract);
+		std::cout << contract << std::endl;
 
 		// bob should not able to sign because its grade is too low
 		bob.signForm(contract);    
@@ -45,6 +47,29 @@ int main()
 		std::cout << "Invalid Grade: " << e.what() << '\n';
 	}
 	
+	std::cout << "\033[1;31m\n\n[TEST 4:] test sign form v2: \033[0m" << std::endl;
+	try
+	{
+		Bureaucrat alice("Alice", 5);
+		std::cout << alice << std::endl;
+
+		Bureaucrat bob("Bob", 100);
+		std::cout << bob << std::endl;
+		
+		Form contract("TopSecretContract", 50 , 50);
+		std::cout << contract << std::endl;
+		
+		bob.signForm(contract);    
+		
+		alice.signForm(contract);
+		std::cout << contract << std::endl;
+
+		// bob should not able to sign because its grade is too low
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Invalid Grade: " << e.what() << '\n';
+	}
 
 }
 
@@ -62,5 +87,19 @@ int main()
 	2. create an Form obj e.g., Form f("rent contract", 6, 6);
 	3. f.beSigned(b){b.signForm(*this)} // rentContract is sigend by b
 
+
+
+	1. Classes using exceptions between each other
+	Form::beSigned() may throw exceptions.
+	Bureaucrat::signForm() must handle them.
+
+	2. More complex logic with exceptions
+	You call a function that calls another function that might throw.
+
+	3. Passing exceptions through layers
+	A class throws (Form)
+	Another class handles (Bureaucrat)
+
+	Program continues
 	
 */

@@ -35,8 +35,9 @@ class AForm{
 		/* behavies */
 		void beSigned(Bureaucrat &b);
 		virtual void execute(Bureaucrat const & executor) const = 0;
-		void checkExecution(Bureaucrat const &executor) const;
+		void checkExecution(Bureaucrat const &executor) const; // check the requerment in base class
 		/* derived exception class && throw */
+
 		class GradeTooHighException : public std::exception
 		{
 			private:

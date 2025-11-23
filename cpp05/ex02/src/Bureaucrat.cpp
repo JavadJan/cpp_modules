@@ -21,11 +21,11 @@ Bureaucrat::Bureaucrat(const std::string &name, const int grade): name(name)// b
 	std::cout << "\033[1;34mCalled Bureaucrat constructor with param: " << grade << "\033[0m" << std::endl;
 	if (grade > this->gradeLimits.max)
 	{
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	}
 	else if (grade < this->gradeLimits.min)
 	{
-		throw GradeTooLowException();
+		throw GradeTooHighException();
 	}
 	this->grade = grade;
 	//std::cout << *this;
@@ -89,8 +89,14 @@ void	Bureaucrat::decreamentBureaucrat(void)
 void Bureaucrat::signForm(AForm &f)
 {
     try {
-        f.beSigned(*this); // Try to sign the form
-        std::cout << this->name << " signed " << f.getName() << std::endl;
+        //f.beSigned(*this); // Try to sign the form
+        //std::cout << this->name << " signed " << f.getName() << std::endl;
+		if (f.getSigend()) {
+            std::cout << f.getName() << " is already signed\n";
+        } else {
+            f.beSigned(*this);
+            std::cout << this->name << " signed " << f.getName() << std::endl;
+        }
     } catch (std::exception &e) {
         std::cout << this->name << " couldn’t sign " << f.getName()
                   << " because " << e.what() << "->(" 

@@ -8,7 +8,7 @@
 #define Form_HPP
 #include <iostream>
 
-
+//tell the compiler “this type exists” without pulling in the full header.
 class Bureaucrat;
 
 class Form{
@@ -51,3 +51,11 @@ class Form{
 std::ostream &operator<<(std::ostream &o, Form const &form);
 
 #endif
+
+/*
+Bureaucrat needs to know about Form.
+
+Form needs to know about Bureaucrat. 
+*/
+
+

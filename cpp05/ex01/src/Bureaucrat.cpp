@@ -86,6 +86,7 @@ void	Bureaucrat::decreamentBureaucrat(void)
 	++grade;  // grade goes down in rank
 	std::cout << this->name << " demoted " << this->grade << std::endl;	
 }
+
 void Bureaucrat::signForm(Form &f)
 {
     try {
@@ -104,12 +105,12 @@ void Bureaucrat::signForm(Form &f)
 //----------------------------------------------------#
 const char* Bureaucrat::GradeTooHighException::what() const throw() 
 {
-    return " Grade is out of range (Too High)";
+    return "Grade is out of range (Too High)!";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() 
 {
-    return " Grade is out of range (Too Low)";
+    return "Grade is out of range (Too Low)!";
 }
 
 // ---------------------------------------------------#

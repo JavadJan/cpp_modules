@@ -19,7 +19,7 @@ int	main(void)
 {
 	TestCase			TEST;
 
-	TEST = PRESIDENTIAL;
+	TEST = NOT_SIGNED;
 	std::cout << "\033[1;31m\n\n[TEST 1:] test sign form: \033[0m" << std::endl;
 	try
 	{
@@ -44,6 +44,7 @@ int	main(void)
 		{
 			std::cout << "\n\nfirst test with someone who did not sighned!" << std::endl;
 			Bureaucrat not_sigend("no_sign", 149);
+
 			std::cout << "		test in loop for all three type form" << std::endl;
 			for (size_t i = 0; i < 3; i++)
 			{
@@ -53,15 +54,16 @@ int	main(void)
 					printf("Wrong name; Failed creation form\n");
 					return 1;
 				}
-				not_sigend.signForm(*form);
+				not_sigend.signForm(*form); 
 				not_sigend.executeForm(*form);
+				// catches exception INSIDE → program continues → delete happens
 				std::cout << std::endl;
 				delete form;
 			}
 			break ;
 		}
 		case ROBOT:{
-			std::cout << "\033[1;35m\n\n[TEST ROBOT] without leaks\033[0m" << std::endl;
+			std::cout << "\033[1;35m\n\n[TEST ROBOT] \033[0m" << std::endl;
 			Bureaucrat rob("rob", 100);
 			for (size_t i = 0; i < 3; i++)
 			{
@@ -128,23 +130,39 @@ int	main(void)
 	}
 }
 
-/* don't catch exception inside the constructor because if cause to finish the constructor
-	and creation object happen,
-		how you get that the creation happen? because destructor happen
+/* 
+	Topic: Factory method pattern + avoiding messy code + more exception handling
 
-	[TEST:]
-	step 0: create an object
-	step 1: creat an object from form
-	step 3. appaly bureaucrat on for to apply
+	What you learn:
+
+	1. A “factory” pattern (Intern::makeForm)
+
+	You dynamically create forms based on input strings.
+
+	2. Clean alternative to giant if/else
+
+	The assignment forces you to avoid:
+
+	if (name == "robotomy")
+	else if (name == "shrubbery")
+	else if (name == "pardon")
 
 
-	[Unformal Implementation:]
-	1. create a Bureaucrat obj e.g., Bureaucrat b("test", 5)
-	2. create an Form obj e.g., Form f("rent contract", 6, 6);
-	3. f.beSigned(b){b.signForm(*this)} // rentContract is sigend by b
+	You must learn a cleaner, scalable pattern (arrays, structs, pointers to functions, etc.)
 
-	bureaucrat.signForm(form): Simulates the bureaucrat’s action of trying to sign a form.
+	3. Returning pointers and handling unknown forms
 
-	form.beSigned(bureaucrat): Simulates the form’s internal
-	logic to verify if the bureaucrat has enough grade to sign it
+	If the name is invalid → print error safely
+
+	If valid → return new form
+
+	4. Exception safety (indirectly)
+
+	Even though makeForm() doesn’t throw by assignment design, you must manage:
+
+	Memory
+
+	Invalid input
+
+	Dynamic creation
 */

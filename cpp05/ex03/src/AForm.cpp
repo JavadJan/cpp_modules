@@ -89,7 +89,7 @@ AForm::GradeTooLowException::GradeTooLowException(const std::string &name, int g
 	std::stringstream ss;
     ss << grade;           // insert the int into the stringstream
     std::string str_grade = ss.str();
-	err_msg = name + "': grade too high (" + str_grade + ")";
+	err_msg = name + "': grade too low (" + str_grade + ")";
 }
 const char* AForm::GradeTooHighException::what() const throw()
 {

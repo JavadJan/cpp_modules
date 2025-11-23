@@ -5,14 +5,14 @@ int	main(void)
 	struct sockaddr_in server_addr, client_addr;
 	socklen_t client_len = sizeof(client_addr);
 	char buffer[1024];
-	int soc_ser_fd;
+	int sockfd;
 	int client_fd;
 
 	//--------------------------#
 	//   		create socket   #
 	//--------------------------#
-	soc_ser_fd = socket(AF_INET, SOCK_STREAM, 0);
-	if (!soc_ser_fd)
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	if (!sockfd)
 		printf("failed to creation socket\n");
 
 	//--------------------------#
@@ -27,14 +27,14 @@ int	main(void)
 	//--------------------------#
 	//   	make connection     #
 	//--------------------------#
-	// connect(soc_ser_fd,(struct sockaddr_in *)(&server_addr),sizeof(server_addr)); for cleint
-	bind(soc_ser_fd, (struct sockaddr *)&server_addr, sizeof(server_addr));
+	// connect(sockfd,(struct sockaddr_in *)(&server_addr),sizeof(server_addr)); for cleint
+	bind(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr));
 
-	// 3. Listen
-	listen(soc_ser_fd, 5);
+	// 3. Listen; Start listening, queue up to 5 pending connections
+	listen(sockfd, 5);
 
 	// 4. Accept
-	client_fd = accept(soc_ser_fd, (struct sockaddr *)&client_addr,
+	client_fd = accept(sockfd, (struct sockaddr *)&client_addr,
 			&client_len);
 
 	// 5. Communicate
@@ -47,5 +47,5 @@ int	main(void)
 
 	// 6. Close
 	close(client_fd);
-	close(soc_ser_fd);
+	close(sockfd);
 }

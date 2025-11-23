@@ -43,13 +43,6 @@ std::string ShrubberyCreationForm::getTarget() const
 //----------------------------------------------------#
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-	//if (!getSigend())
-	//{
-	//	//throw std::runtime_error("Form not signed!");
-	//	throw NotSignedException(executor.getName());
-	//}
-	//if (executor.getGrade() > getGradeExe()) // e.g., 45 > 44
-    //    throw GradeTooLowException(executor.getName(), executor.getGrade());
 	checkExecution(executor);
 	std::ofstream ofs((target + "_shrubbery").c_str());
 	if (!ofs)
@@ -86,10 +79,15 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 
 std::ostream &operator<<(std::ostream &out, ShrubberyCreationForm const &sh)
 {
-	out << sh.getName() << " with target: (" << sh.getTarget()
-	<< "), grade sign " << sh.getGradeSigned() 
-	<< " grade execution " << sh.getGradeExe()
-	<< " signed=" << (sh.getSigend() ? "true" : "false") << "created " 
-	<< sh.getTarget() <<"_shrubbery" << '\n';
-	return (out);
+    out << sh.getName() << " with target: (" << sh.getTarget() << ")"
+        << ", grade sign " << sh.getGradeSigned() 
+        << " grade execution " << sh.getGradeExe()
+        << " signed = " << (sh.getSigend() ? "true" : "false");
+    if (sh.getSigend())
+        out << " && created " << sh.getTarget() << "_shrubbery";
+
+    out << '\n';
+    return out;
 }
+
+
