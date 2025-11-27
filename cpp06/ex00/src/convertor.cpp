@@ -92,8 +92,8 @@ void	Float(const std::string &str)
 		std::cout << "float: nanf" << std::endl;
 	else if (std::isinf(f))
 		std::cout << "float: " << (f > 0 ? "+inff" : "-inff") << std::endl;
-	else if (f < MIN_FLOAT || f > MAX_FLOAT)
-		std::cout << "float: impossible" << std::endl;
+	// else if (f < MIN_FLOAT || f > MAX_FLOAT)
+	// 	std::cout << "float: impossible" << std::endl;
 	else
 	{
 

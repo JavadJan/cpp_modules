@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 int main()
 {
@@ -25,5 +26,9 @@ int main()
 	char c = 'c';
 	int x = 90;
 	c = x; // on denger 4 byte to 1 byte
-	x = (int)
+
+	std::cout << "\n\n";
+	int j = 10;
+	std::cout << std::fixed << std::setprecision(2) << static_cast<float> (j) << "f" << "\n";
+
 }
