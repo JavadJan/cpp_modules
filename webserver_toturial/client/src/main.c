@@ -9,7 +9,7 @@ int	main(void)
 	int sockfd;
 	struct sockaddr_in server_addr;
 	char buffer[1024];
-	const char *message = "Hello from client!";
+	const char *message = "GET /include/index.html http/1.1\r\n";
 
 	// 1. Create socket
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);

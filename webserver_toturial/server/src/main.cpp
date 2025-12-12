@@ -1,4 +1,57 @@
-#include "../include/server.h"
+#include "../include/server.hpp"
+#include "../include/ParsedData.hpp"
+
+enum STATE FSM(char buffer[], temp_data *data)
+{
+	(void)buffer;
+	(void)data;
+	std::string bufr = buffer;
+
+	STATE state = REQ_LINE;
+	while (state != DONE)
+	{
+		switch (state)
+		{
+		case REQ_LINE:
+		{
+			// fill method, version, path
+			std::cout << "parsing the req_line\n";
+			if (bufr.find("GET") == std::string::npos)
+				state = ERROR;
+			//state = HEADER;
+			break ;
+		}
+		case HEADER:
+		{
+			std::cout << "parsing the header\n";
+			state = BODY;
+			// if exist key value it is header
+			break ;
+		}
+		case BODY:
+		{
+			std::cout << "parsing the body\n";
+			//state = DONE;
+			break;
+		}
+		case DONE:
+		{
+			std::cout << "parsing the DONE\n";
+			state = ERROR;
+			break;
+		}
+		case ERROR:
+		{
+			std::cout << "ERROR\n";
+			return ERROR;
+			break;
+		}
+		default:
+			break ;
+		}
+	}
+	return DONE;
+}
 
 int	main(void)
 {
@@ -39,7 +92,11 @@ int	main(void)
 
 	// 5. Communicate
 	recv(client_fd, buffer, sizeof(buffer), 0);
-	printf("[SERVER] Received: %s\n", buffer);
+
+	// run FSM, and parse buffer with state machine
+	temp_data data;
+	if (FSM(buffer, &data) == ERROR)
+		std::cout << "return bad request page error\n";
 
 	send(client_fd, "Hello from server!", 18, 0);
 	const char *response = "Hello from server!";
