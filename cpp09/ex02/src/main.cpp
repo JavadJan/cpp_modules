@@ -14,12 +14,13 @@ int	main(int ac, char *av[])
 		{
 			std::cout << A[i] << " " ;
 		}
+		std::cout << std::endl;
 		//display(A);
 		long begin = getTimeMicroseconds();
 		std::vector<long> soerted = fordJohnson(A);
 		long end = getTimeMicroseconds();
 		
-		std::cout << "sorted: " << std::endl;
+		std::cout << "sorted: ";
 		for (size_t i = 0; i < soerted.size(); i++)
 		{
 			std::cout << soerted[i] << " " ;
@@ -31,10 +32,10 @@ int	main(int ac, char *av[])
 		std::deque<long> deq(A.begin(), A.end()); // copy
 		
 		long beginSTD = getTimeMicroseconds();
-		std::deque<long> sortedD = fordJohnson(deq);
+		std::deque<long> sortedD = fordJohnsonDEQUE(deq);
 		long endSTD = getTimeMicroseconds();
-		printTime(end, begin);
-		printTime(beginSTD, endSTD);
+		printTime(end, begin, A.size());
+		printTime(endSTD, beginSTD, sortedD.size());
 
 
 	}
