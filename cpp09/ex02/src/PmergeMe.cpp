@@ -63,50 +63,53 @@ void display(std::vector<long> A)
     }
 	std::cout << std::endl;
 }
-void merge(std::vector<long> &A, int l, int mid, int h)
+
+
+void merge(std::vector<std::pair<long, long> >& pairs, int l, int mid, int h)
 {
     int i = l;
     int j = mid + 1;
 
-    std::vector<long> B;
+    std::vector<std::pair<long, long> > B;
+	//pre-allocates memory so the vector can grow efficiently without repeated reallocations in push_back().
     B.reserve(h - l);
 
     while (i <= mid && j < h)
     {
-        if (A[i] < A[j])
-            B.push_back(A[i++]);
+        if (pairs[i].second < pairs[j].second)
+            B.push_back(pairs[i++]);
         else
-            B.push_back(A[j++]);
+            B.push_back(pairs[j++]);
     }
 
     while (i <= mid)
-        B.push_back(A[i++]);
+        B.push_back(pairs[i++]);
 
     while (j < h)
-        B.push_back(A[j++]);
+        B.push_back(pairs[j++]);
 
     for (int k = 0; k < (int)B.size(); ++k)
 	{
 		//std::cout << "low: " << l << std::endl;
-        A[l + k] = B[k];
+        pairs[l + k] = B[k];
 	}
 }
 
-void MergeSort(std::vector<long> &A, int l, int h)
+void MergeSort(std::vector<std::pair<long, long> >& pairs, int l, int h)
 {
     if (h - l <= 1)
 		return;  // 0 or 1 element → sorted
 
     int mid = (l + h - 1) / 2;
 
-    MergeSort(A, l, mid + 1);   // left part
-    MergeSort(A, mid + 1, h);   // right part
-    merge(A, l, mid, h);
+    MergeSort(pairs, l, mid + 1);   // left part
+    MergeSort(pairs, mid + 1, h);   // right part
+    merge(pairs, l, mid, h);
 }
 
 
 
-
+/*[STEP 1]:  Make pairs (a0, b0), (a1, b1), (a2, b2), ...  */
 std::vector<std::pair<long , long > > formPair(std::vector<long> A)
 {
 	// use push_bakc(); it use uses from resize
@@ -129,35 +132,19 @@ std::vector<std::pair<long , long > > formPair(std::vector<long> A)
 	return pairs;
 }
 
-bool compareBySecond(const std::pair<long, long>& p1,
-                     const std::pair<long, long>& p2)
-{
-    return p1.second < p2.second;
-}
+//void sortPairsByA(std::vector<std::pair<long, long> >& pairs)
+//{
+//	MergeSort(pairs, 0, pairs.size());
+//    //std::sort(pairs.begin(), pairs.end(), compareBySecond);
+//}
 
-void sortPairsByA(std::vector<std::pair<long, long> >& pairs)
-{
-    std::sort(pairs.begin(), pairs.end(), compareBySecond);
-}
-
-
-
-std::pair<long , long > pickb1FromSmallestPair(std::vector<std::pair<long , long > > pairs)
-{
-	if (pairs.empty())
-        throw std::runtime_error("pairs is empty");
-
-    std::vector<std::pair<long, long> >::const_iterator it =
-        std::min_element(pairs.begin(), pairs.end());
-
-    return *it; 
-}
 
 std::map<std::string, std::vector<long> > buildMainPend(std::vector<long> A)
 {
 	// build 
 	std::vector<long> main;
 	std::vector<long> pend;
+
 	long leftOver = LONG_MAX;
 
 	// cut the odd number from A
@@ -167,30 +154,25 @@ std::map<std::string, std::vector<long> > buildMainPend(std::vector<long> A)
 		A.pop_back();
 	}
 
-	// make pairs
+	// [STEP 1] make pairs
 	std::vector<std::pair<long, long> > pairs = formPair(A);
-	sortPairsByA(pairs);
-	std::cout << "sorted by pairs:" << std::endl;
-	for (size_t i = 0; i < pairs.size(); i++)
-	{
-		std::cout << "first: " << pairs[i].first << ", second: " << pairs[i].second << std::endl;
-	}
 
-	// sort pairs by an
+	// [STEP 2] sort pairs by second (a0, b0), (a1, b1), (a2, b2), ...
+	//sortPairsByA(pairs);
+	MergeSort(pairs, 0, pairs.size());
+	//std::cout << "sorted by pairs:" << std::endl;
+	//for (size_t i = 0; i < pairs.size(); i++)
+	//{
+	//	std::cout << "first: " << pairs[i].first << ", second: " << pairs[i].second << std::endl;
+	//}
 
 	// add smallest pair includeing b1
+	// [STEP 3] create MAIN list and PEND list
 	main.push_back(pairs[0].first);
 	main.push_back(pairs[0].second);
 
 	for (size_t i = 1; i < pairs.size(); i++)
 	{
-		// keep the leftover to add in pend
-		if (pairs[i].second == LONG_MAX)
-		{
-			leftOver = pairs[i].first;
-			continue;
-		}
-
 		// make main
 		main.push_back(pairs[i].second);		
 
@@ -210,11 +192,124 @@ std::map<std::string, std::vector<long> > buildMainPend(std::vector<long> A)
 }
 
 //add pend to the main by Jacobsthal rule
-//void Jacobsthal(std::map<std::string, std::vector<long> > &pairs)
-//{
+std::vector<int> genJacobList(int n)
+{
+	std::vector<int> out;
+	if (n < 0)
+		return out; // or throw std::invalid_argument("Negative input not allowed");
 
-//}
+	out.push_back(1); // 1
+	if (n == 0)
+		return out;
 
+	out.push_back(1);
+	if (n == 1)
+		return out;
+
+	int i = 2;
+	while (true)
+	{
+		int next = out[i - 1] + 2 * out[i - 2];
+		if (next - 1 < 0)
+			continue;
+		if (next > n )
+			break ;
+		out.push_back(next);
+		i++;
+	}
+	
+	return out;
+}
+
+
+std::vector<int> uniqueConsecutive(const std::vector<int> &v)
+{
+    std::vector<int> out;
+	if (v.empty())
+		return out;
+
+	// Ensure v is not empty before accessing v[0]
+	out.push_back(v[0]);
+
+    for (size_t i = 1; i < v.size(); ++i)
+    {
+        if (v[i] != v[i-1])
+            out.push_back(v[i]);
+    }
+    return out;
+}
+
+// search in binary with upper_bound and insert
+void binaryInsert(std::vector<long> &v, long x)
+{
+    std::vector<long>::iterator it =
+        std::upper_bound(v.begin(), v.end(), x);
+    v.insert(it, x);
+}
+
+
+void Jacobsthal(std::map<std::string, std::vector<long> > &main_pend)
+{
+
+	std::vector<long> &main = main_pend["main"];
+    std::vector<long> &pend = main_pend["pend"];
+
+	size_t n = main_pend["pend"].size(); // number for elemnt for jacobsthal list
+	if (n == 0)
+		return;
+	std::vector<int> listJ = genJacobList(n); // it generate the duplicate elem
+	std::vector<int> uListJac   = uniqueConsecutive(listJ); // remove the duplication
+
+	int lastJ = -1;
+
+	for (size_t i = 0; i < uListJac.size(); ++i)
+    {
+        int j = uListJac[i];
+        if ((size_t)j >= n)
+            continue;
+
+        // insert pend[j]
+        binaryInsert(main, pend[j]);
+
+        // insert in-gap block (descending)
+        int k = j - 1;
+        while (k > lastJ)
+        {
+            binaryInsert(main, pend[k]);
+            --k;
+        }
+
+        lastJ = j;
+    }
+
+    // Insert remaining elements after final Jacobsthal
+    int k = lastJ + 1;
+    while ((size_t)k < n)
+    {
+        binaryInsert(main, pend[k]);
+        ++k;
+    }
+	
+}
+
+std::vector<long> fordJohnson(std::vector<long> B)
+{
+	std::map<std::string, std::vector<long> > main_pend = buildMainPend(B);
+	//std::cout << "main: " << std::endl;
+	//for (size_t i = 0; i < main_pend["main"].size(); i++)
+	//{
+	//	std::cout << main_pend["main"][i] << std::endl;
+	//}
+
+	//std::cout << "pend: " << std::endl;
+	//for (size_t i = 0; i < main_pend["pend"].size(); i++)
+	//{
+	//	std::cout << main_pend["pend"][i] << std::endl;
+	//}
+
+	Jacobsthal(main_pend);
+	return (main_pend["main"]);
+}
 
 
 // useles
