@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   MutantStack.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/27 13:12:26 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/27 13:12:29 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MutantStack_hpp
 # define MutantStack_hpp
 
@@ -6,81 +18,35 @@
 #include <stack>
 
 template <typename T>
-class MutantStack: public std::stack<T>{
+class MutantStack: public std::stack<T>{ // it should use from the std::stakc and its container
 	private:
-		std::vector<T> data; // vector of any type can be, determin at compile-time
+		// std::vector<T> data; // vector of any type can be, determin at compile-time
 	public:
-		MutantStack(){
-			std::cout << "Called Constructor" << std::endl;
-		};
-		~MutantStack(){};
-		MutantStack(const MutantStack &other)
-		{
-			data = other.data;
-		}
-		//################# subclass iterator
-		class iterator{
-			private:
-				typename std::vector<T>::iterator it;
-			public:
-				//using myIterator = std::vector<T>::iterator it;
-				typedef typename std::vector<T>::iterator iter; 
-				//constructor
-				iterator(typename std::vector<T>::iterator itr): it(itr){
-					std::cout << "Called default iterator Constructor" << std::endl;
-				}
+		MutantStack();
+		~MutantStack();
+		MutantStack(const MutantStack &other);
+		
+		MutantStack& operator=(const MutantStack &other);
 
-				T &operator*(){
-					return *it;
-				}
-				iterator&operator++(){ // ++x
-						this->it++;
-					return (*this);
-				}
-				iterator operator++(int){ // return a copy, not with a refrence
-					iterator temp = *this;
-					this->it++;
-					return (temp);
-				}
-				iterator &operator--(){
-						this->it--;
-					return (*this);
-				}
-				iterator operator--(int){ // return a copy, not a by refrence
-					iterator temp = *this;
-					this->it--;
-					return (temp);
-				}
-				bool operator!=(const iterator& other) const { return it != other.it; }
-			};
-			
-		iterator begin(){return iterator(data.begin());}
-		iterator end(){return iterator(data.end());}
-		void push(const T& value){data.push_back(value);}
-		void pop(){if(!data.empty()) data.pop_back();}
-		T top() {
-			if (data.empty()) throw std::out_of_range("Stack is empty");
-			return data.back();
-		}
+		typedef typename std::stack<T>::container_type::iterator iterator; //points to its internal container
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator; //points to its internal container
+		typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator; //points to its internal container
+		typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator; //points to its internal container
 
-		bool empty(){return data.empty();}
-		size_t size(){
-			return data.size();
-		}
-		void display(){
-			for (int i = 0; i < data.size(); i++) {
- 				std::cout << data[i] << "\n";
-			}
-			
-		}
+
+	iterator begin();
+	iterator end();
+
+	const_iterator begin() const;
+	const_iterator end() const;
+
+	reverse_iterator rbegin();
+	reverse_iterator rend();
+
+	const_reverse_iterator rbegin() const;
+	const_reverse_iterator rend() const;
 
 };
 
-template <typename T>
-std::ostream    &operator<<(std::ostream &out, MutantStack<T> const &st){
-	for (typename std::vector<T>::const_iterator it = st.data.begin(); it != st.data.end(); ++it)
-            out << *it << " ";
-	return out;
-}
-
+#include "MutantStack.tpp"
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   generate.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 13:17:52 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/26 13:31:10 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/Base.hpp"
 #include "../include/A.hpp"
 #include "../include/B.hpp"
@@ -28,11 +40,11 @@ void identify(Base* p)
 	try
 	{
 		if (dynamic_cast<A*>(p))
-			std::cout << "A" << std::endl;
+			std::cout << "ptr:  A" << std::endl;
 		else if (dynamic_cast<B*>(p))
-			std::cout << "B" << std::endl;
+			std::cout << "ptr: B" << std::endl;
 		else if (dynamic_cast<C*>(p))
-			std::cout << "C" << std::endl;
+			std::cout << "ptr: C" << std::endl;
 		else
 		{
 			throw std::runtime_error("Failed to cast");
@@ -59,28 +71,30 @@ void identify(Base& p)
 		(void)a;
 		std::cout << "A" << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(std::bad_cast& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << "Cast failed: " << e.what() << '\n';
 	}
+
 	try
 	{
 		B &b = dynamic_cast<B &>(p);
 		(void)b;
 		std::cout << "B" << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(std::bad_cast& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << "Cast failed: " << e.what() << '\n';
 	}
+
 	try
 	{
 		C &c = dynamic_cast<C &>(p);
 		(void)c;
 		std::cout << "C" << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(std::bad_cast& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << "Cast failed: " << e.what() << '\n';
 	}
 }

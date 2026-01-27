@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 13:16:29 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/26 13:16:31 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ScalarConverter_hpp
 # define ScalarConverter_hpp
 
@@ -13,10 +25,6 @@
 
 # define MIN_INT std::numeric_limits<int>::min() //-2147483648
 # define MAX_INT std::numeric_limits<int>::max() //2147483647
-//# define MIN_FLOAT std::numeric_limits<float>::lowest() //-3.40282e+38
-//# define MAX_FLOAT std::numeric_limits<float>::max() //3.40282e+38
-//# define MIN_DOUBLE std::numeric_limits<double>::lowest() //-1.79769e+308
-//# define MAX_DOUBLE std::numeric_limits<double>::max() //1.79769e+308
 #define MIN_FLOAT -3.402823466e+38F
 #define MAX_FLOAT  3.402823466e+38F
 
@@ -43,10 +51,12 @@ class ScalarConverter{
 	public: 
 		static void convert(const std::string &str);
 };
+
+
 e_type	detectType(const std::string str, size_t len);
 
 bool	isPsoudo(const std::string &s);
-bool	isValid(const std::string &s);
+// bool	isValid(const std::string &s);
 int 	isChar(const std::string &str, int len);
 int 	isInteger(const std::string &str, size_t len);
 //int		isFloat(const std::string &str, size_t len, size_t dot);

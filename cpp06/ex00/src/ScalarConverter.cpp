@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 13:17:01 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/26 13:17:03 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ScalarConverter.hpp"
 #include <cstdio>
 
@@ -21,31 +33,12 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 	return (*this);
 }
 
-/*
-	I GET THE DOUBLE AS BASE, BECAUSE:
-	double can hold any int or float value without losing much precision.
-	It can represent NaN, inf,
-		and other special floating-point values (which int and char cannot).
-	It allows safe downcasting using static_cast<>().
-*/
-
 
 void ScalarConverter::convert(const std::string &str)
 {
 	e_type	type;
 
 	type = detectType(str, str.size());
-	// approach 1: with function pointer
-		//int arr[] = {0, 1, 2, 3, 4, -1};
-		//void (*map[6])(const std::string &) = { Special, Char, Integer, Float, Double, Invalid};
-		//for (int i = 0; i < 6; i++)
-		//{
-		//	if (i== type)
-		//	{
-		//		map[i](str);
-		//	}
-		//}
-	//approach 2: with switch case
 	switch (type)
 	{
 	case SPECIAL:
@@ -81,9 +74,3 @@ void ScalarConverter::convert(const std::string &str)
 	}
 	}
 }
-
-/* first ask question?
-	1. what kind of coversion operator exist?
-	2. how to covert string to char?
-
-*/

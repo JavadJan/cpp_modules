@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printType.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 13:16:58 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/26 13:16:59 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ScalarConverter.hpp"
 
 void	Invalid(const std::string &s);
@@ -56,8 +68,11 @@ void	Integer(const std::string &str)
 		std::cout << "impossible" << std::endl;
 	else
 		std::cout << static_cast<int>(n) << std::endl;
-	std::cout << "float: " << static_cast<float>(n) << ".0f" << std::endl;
-	std::cout << "double: " << static_cast<double>(n) << ".0" << std::endl;
+
+		// float
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << static_cast<float>(n) << "f" << std::endl;
+	std::cout << "double: " << static_cast<double>(n) << std::endl;
 }
 void	Float(const std::string &str)
 {
@@ -69,8 +84,14 @@ void	Float(const std::string &str)
 
 	size_t pos = str.find('.');
 	size_t _pos = (pos == std::string::npos) ? 0 : str.length() - pos - 2;
+	// std::cout << "_pos : " << _pos << std::endl;
 	bool	tolerance = std::fabs(f - static_cast<int>(f)) < 0.0000000000001;
-	std::cout << "base in float: " << static_cast<float>(f) << " " << str.length() - pos - 1 << std::endl;
+	// std::cout << "f : " << f << std::endl;
+	// std::cout << "f : " << std::fixed << std::setprecision(10) << f << std::endl;
+	// std::cout << "static_cast<int>(f)" << std::fixed << std::setprecision(10) << static_cast<int>(f) << std::endl;
+
+	// std::cout << "tolerance: " << (std::fabs(f - static_cast<int>(f)) < 0.0000000000001) << std::endl;
+	// std::cout << "-: " << (std::fabs(f - static_cast<int>(f))) << std::endl;
 	n = static_cast<long>(f);
 	std::cout << "char: ";
 	if (n < 0 || n > 127)
@@ -88,6 +109,8 @@ void	Float(const std::string &str)
 	else
 		std::cout << static_cast<int>(n) << std::endl;
 	
+	
+	// std::cout << "float: " << _pos  << static_cast<float>(f) << "f" << std::endl;
 	if (std::isnan(f))
 		std::cout << "float: nanf" << std::endl;
 	else if (std::isinf(f))
@@ -98,9 +121,16 @@ void	Float(const std::string &str)
 	{
 
 		if (_pos <= 7)
+		{
 			std::cout << std::fixed << std::setprecision(_pos);
-		//std::cout << "float: " << static_cast<float>(f) << "f" << std::endl;
-		std::cout << "float: " << f << ((tolerance && dot ==std::string::npos) ? ".0f" : "f") << std::endl;;
+
+		}
+		else if (_pos > 7 && tolerance)
+		{
+			std::cout << std::fixed << std::setprecision(1);
+
+		}
+		std::cout << "float: " << static_cast<float>(f) << ((tolerance && dot ==std::string::npos) ? ".0f" : "f") << std::endl;
 	}
 	
 	
@@ -110,7 +140,6 @@ void	Float(const std::string &str)
 		std::cout << "double: " << (f > 0 ? "+inf" : "-inf") << std::endl;
 	else
 	{
-		//std::cout << std::fixed << std::setprecision(tolerance);
 		std::cout << "double: " << static_cast<double>(f) << ((tolerance && dot ==std::string::npos) ? ".0" : "") << std::endl;
 	}
 }
@@ -119,12 +148,12 @@ void	Double(const std::string &str)
 {
 	double	f;
 	long	n;
-	size_t pos = str.find('.');
 	//size_t tolerance = (pos == std::string::npos) ? 0 : str.length() - pos - 1; // one for f
-	
+	size_t pos = str.find('.');
+	size_t _pos = (pos == std::string::npos) ? 0 : str.length() - pos - 1;
+
 	f = atof(str.c_str());
 	bool	tolerance = std::fabs(f - static_cast<int>(f)) < 0.0000000000001;
-	std::cout << "base in double: " << f << " " << str.length() - pos - 1 << std::endl;
 	n = static_cast<long>(f);
 
 	/* CHAR */
@@ -165,6 +194,14 @@ void	Double(const std::string &str)
 	else
 	{
 		//std::cout << std::fixed << std::setprecision(tolerance);
+		if (_pos <= 17)
+		{
+			std::cout << std::fixed << std::setprecision(_pos);
+		}else if (_pos > 17 && tolerance)
+		{
+			std::cout << std::fixed << std::setprecision(1);
+
+		}
 		std::cout << "double: " << f << (tolerance ? ".0" : "") << std::endl;
 	}
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 14:43:32 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/24 15:39:59 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/AForm.hpp"
 #include "../include/Bureaucrat.hpp"
 #include "../include/PresidentialPardonForm.hpp"
@@ -18,7 +30,7 @@ int	main(void)
 {
 	TestCase			TEST;
 
-	TEST = SHRUBBERY;
+	TEST = LEAK;
 	//AForm *ref;
 	// do its job
 	std::cout << "\033[1;31m\n\n[TEST 1:] test sign form: \033[0m" << std::endl;
@@ -75,7 +87,7 @@ int	main(void)
 			break ;
 		}
 		case LEAK:{
-			std::cout << "\033[1;35m\n\n[TEST] robotmyRequest: \033[0m" << std::endl;
+			std::cout << "\033[1;35m\n\n[TEST] LEAK: robotmyRequest: \033[0m" << std::endl;
 			Bureaucrat			*robot = new Bureaucrat("robot", 100); 
 			RobotomyRequestForm	*r = new RobotomyRequestForm("robot");
 			std::cout << *r << std::endl;
@@ -105,7 +117,7 @@ int	main(void)
 			Bureaucrat pres("JAVAD", 1);
 			std::cout << pres << std::endl;
 
-			PresidentialPardonForm pres_form("piece");
+			PresidentialPardonForm pres_form("contract");
 			std::cout << pres_form;
 
 			pres.signForm(pres_form);

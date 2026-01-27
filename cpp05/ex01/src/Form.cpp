@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 14:43:00 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/24 14:43:01 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/Form.hpp"
 #include "../include/Bureaucrat.hpp"
 
@@ -9,8 +21,8 @@
 //----------------------------------------------------#
 Form::Form()
 : name("default")      // or any default string
-, grade_signed(0)      // must give a value
-, grade_exe(0)         // must give a value
+, grade_signed(150)      // must give a value
+, grade_exe(150)         // must give a value
 , sign(false)
 {
 	std::cout << "\033[1;33mCalled Form default constructor\033[0m" << std::endl;
@@ -49,7 +61,7 @@ Form& Form::operator=(const Form& other) // attribute are const, can be assign
 	if (this != &other)
 	{
 		//this->name = other.name;
-		//this->grade_exe = other.grade_exe;
+		// this->grade_exe = other.grade_exe;
 	}
 	return (*this);
 }

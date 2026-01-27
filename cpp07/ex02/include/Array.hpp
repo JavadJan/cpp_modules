@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 16:46:25 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/26 16:46:27 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef Array_hpp
 # define Array_hpp
 
@@ -47,18 +59,18 @@ class Array{
 		{
 			return (this->_size);
 		}
-		T& operator[](size_t index) // for modifable
+		T& operator[](int index) // for modifable
 		{
-			if (index >= size())
+			if (index < 0 || static_cast<unsigned int>(index) >= size())
 			{
 				throw std::out_of_range("Index out of bounds"); // check bounds
 			}	
 			/* Elements can be accessed through the subscript operator: [ ] */
 			return (elements[index]);
 		}
-		const T& operator[](size_t index) const // for read only
+		const T& operator[](int index) const // for read only
 		{
-			if (index >= size())
+			if (index < 0 || static_cast<unsigned int>(index) >= size())
 			{
 				throw std::out_of_range("Index out of bounds"); // check bounds
 			}	

@@ -11,7 +11,7 @@ NAME = convert
 OBJ_F = obj/
 SRC_F = src/
 
-SRC = main.cpp ScalarConverter.cpp detect_type.cpp convertor.cpp
+SRC = main.cpp ScalarConverter.cpp detect_type.cpp printType.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -19,11 +19,11 @@ OBJ_P = $(addprefix $(OBJ_F), $(OBJ))
 
 all: $(NAME)
 
-$(NAME) : $(OBJ_P) $(HEADER)
+$(NAME) : $(OBJ_P) 
 	$(CC) $(FLAGS) $(OBJ_P) -o $(NAME)
 	@echo "✅ successfully created 🏗️ 🛠️!"
 
-$(OBJ_F)%.o:$(SRC_F)%.cpp | $(OBJ_F) #how make objects 
+$(OBJ_F)%.o:$(SRC_F)%.cpp $(HEADER) | $(OBJ_F) #how make objects 
 	$(CC) $(FLAGS) -c $< -o $@
 	@echo "successfully $@ created ✅"
 

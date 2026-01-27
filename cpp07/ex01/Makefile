@@ -3,7 +3,7 @@ FLAGS = -Wall -Wextra -Werror -Iinclude -std=c++98
 
 
 H = include/
-HEADER = $(H)Iter.hpp
+HEADER = $(H)iter.hpp
 
 
 NAME = template
@@ -19,11 +19,11 @@ OBJ_P = $(addprefix $(OBJ_F), $(OBJ))
 
 all: $(NAME)
 
-$(NAME) : $(OBJ_P) $(HEADER)
+$(NAME) : $(OBJ_P) 
 	$(CC) $(FLAGS) $(OBJ_P) -o $(NAME)
 	@echo "✅ successfully created 🏗️ 🛠️!"
 
-$(OBJ_F)%.o:$(SRC_F)%.cpp | $(OBJ_F) #how make objects 
+$(OBJ_F)%.o:$(SRC_F)%.cpp  $(HEADER) | $(OBJ_F) #how make objects 
 	$(CC) $(FLAGS) -c $< -o $@
 	@echo "successfully $@ created ✅"
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 14:43:03 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/24 14:43:05 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/Bureaucrat.hpp"
 #include "../include/Form.hpp"
 
@@ -90,15 +102,14 @@ int main()
 
 
 	1. Classes using exceptions between each other
-	Form::beSigned() may throw exceptions.
-	Bureaucrat::signForm() must handle them.
+		Bureaucrat::signForm() must handle them.
+		Form::beSigned() may throw exceptions.
 
-	2. More complex logic with exceptions
-	You call a function that calls another function that might throw.
+	2. function that calls another function that might throw.
 
 	3. Passing exceptions through layers
-	A class throws (Form)
-	Another class handles (Bureaucrat)
+		A class throws (Form)
+		Another class handles (Bureaucrat)
 
 	Program continues
 	

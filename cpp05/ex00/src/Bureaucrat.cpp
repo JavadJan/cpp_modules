@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 14:42:36 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/11/24 14:42:38 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/Bureaucrat.hpp"
 
 t_grade Bureaucrat::gradeLimits = {1, 150};
@@ -6,34 +18,26 @@ t_grade Bureaucrat::gradeLimits = {1, 150};
 //                    constructor                     #
 //                                                    #
 //----------------------------------------------------#
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat(): name("Default"), grade(150)
 {
-	std::cout << "\033[1;34mCalled Bureaucrat defaault constructor\033[0m]" << std::endl;
+	std::cout << "\033[1;34mCalled Bureaucrat default constructor\033[0m" << std::endl;
 }
 Bureaucrat::~Bureaucrat()
 {
 	std::cout << "\033[1;34mCalled Bureaucrat destructor\033[0m" << std::endl;
 }
-Bureaucrat::Bureaucrat(const std::string &name,const int grade): name(name)// because the name is constant it should init in initilazer
+Bureaucrat::Bureaucrat(const std::string &name, const int grade): name(name), grade(grade) // because the name is constant it should init in initializer
 {
 	std::cout << "\033[1;34mCalled Bureaucrat constructor with param: " << grade << "\033[0m" << std::endl;
-	if (grade > this->gradeLimits.max)
+	if (this->grade > this->gradeLimits.max)
 	{
 		throw GradeTooLowException();
 	}
-	else if (grade < this->gradeLimits.min)
+	else if (this->grade < this->gradeLimits.min)
 	{
 		throw GradeTooHighException();
 	}
-	this->grade = grade;
-	//std::cout << *this;
-	//try
-	//{
-	//}
-	//catch(const std::exception& e)
-	//{
-	//	std::cout << "Invalid Grade: " << grade << e.what() << '\n';
-	//}
+	// grade was initialized in the initializer list
 }
 /* 
 	⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
