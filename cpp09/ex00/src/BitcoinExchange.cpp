@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/27 15:19:53 by mkhavari          #+#    #+#             */
+/*   Updated: 2026/01/28 08:51:40 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/BitcoinExchange.hpp"
 #include <ctype.h>
 
@@ -16,7 +28,8 @@ BitcoinExchange::BitcoinExchange(const char* fielname)
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
     : date_price(other.date_price) {}
 
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
+{
     if (this != &other)
         date_price = other.date_price;
     return *this;
@@ -29,7 +42,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 bool isValidDate(const std::tm &tm)
 {
     // Convert to normal year/month values
-    int year  = tm.tm_year + 1900; // tm_year is years since 1900
+    int year  = tm.tm_year + 1900; // tm_year is years since 1900; offset 1900
     int month = tm.tm_mon;         // tm_mon is 0–11
     int day   = tm.tm_mday;
 
@@ -123,8 +136,14 @@ void BitcoinExchange::readDB(const char *connection)
 //			GET RES					#
 //									#
 // ##################################
+bool compareDBByDate(const DB& a, const DB& b)
+{
+    return a.date < b.date;
+}
+
 void BitcoinExchange::getRes()
 {
+    db.sort(compareDBByDate);
     for (std::list<Bitcoin>::iterator it = date_price.begin();
          it != date_price.end(); ++it)
     {
@@ -136,10 +155,12 @@ void BitcoinExchange::getRes()
         long double rate = 0;
         bool found = false;
 
+        
         // search in DB list
         for (std::list<DB>::iterator dbIt = db.begin();
              dbIt != db.end(); ++dbIt)
         {
+            
             if (dbIt->date == ts)            // exact match
             {
                 rate = dbIt->exchange_rate;
@@ -221,12 +242,14 @@ void BitcoinExchange::readInput(const char *filename)
         record.error = "";
 
         // split into date and price
-        if (!std::getline(ss, dateStr, '|')) {
+        if (!std::getline(ss, dateStr, '|')) 
+        {
             record.error = "Error: missing delimiter => " + line;
             date_price.push_back(record);
             continue;
         }
-        if (!std::getline(ss, priceStr)) {
+        if (!std::getline(ss, priceStr)) 
+        {
             record.error = "Error: missing price => " + line;
             date_price.push_back(record);
             continue;
@@ -284,6 +307,11 @@ void BitcoinExchange::readInput(const char *filename)
         }
 
         long x = std::atol(priceStr.c_str());
+        // if (x > 1000) {
+        //     record.error = "Error: too large a number.";
+        //     date_price.push_back(record);
+        //     continue;
+        // }
         if (x > 2147483647) {
             record.error = "Error: too large a number.";
             date_price.push_back(record);
@@ -297,15 +325,13 @@ void BitcoinExchange::readInput(const char *filename)
             continue;
         }
 
-        // ✅ valid record
+        // valid record
         record.date = ts;
 		record.dateStr = dateStr;
         record.value = price;
         date_price.push_back(record);
 		//i++;
     }
-	//if (i == 0)
-	//	throw BadFile();
 }
 
 

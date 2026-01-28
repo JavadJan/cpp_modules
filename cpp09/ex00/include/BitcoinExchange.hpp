@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/27 15:19:47 by mkhavari          #+#    #+#             */
+/*   Updated: 2026/01/27 17:41:27 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BitcoinExchange_hpp
 # define BitcoinExchange_hpp
 
@@ -20,10 +32,10 @@ enum State {
 
 struct Bitcoin
 {
-	unsigned long date;
+	unsigned long date; // date | value
 	long double value;
 
-	double result;
+	long double result;
 	std::string dateStr;
 	std::string error;
 };
