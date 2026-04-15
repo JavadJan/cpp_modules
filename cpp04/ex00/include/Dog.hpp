@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 22:17:39 by mkhavari          #+#    #+#             */
-/*   Updated: 2025/09/24 22:17:40 by mkhavari         ###   ########.fr       */
+/*   Created: 2025/09/24 22:17:00 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/09/25 09:46:15 by mkhavari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-#define BRAIN_HPP
+#ifndef	DOG_HPP
+#define	DOG_HPP
+#include "Animal.hpp"
 #include <iostream>
-#include <stdlib.h>
 
-class Brain
+class Dog: public Animal
 {
-	private:
-		std::string ideas[100];
 	public:
-		Brain(); // create new object
-		Brain(std::string ideas[]); // create new object
-		~Brain();	// delete that object
-		Brain(const Brain& other);
-		Brain& operator=(const Brain& other);
-		std::string *getIdeas();
+		Dog();
+		Dog(std::string type);
+		~Dog();
+		Dog(const Dog& other);
+		Dog& operator=(const Dog& other);
+		void makeSound() const ;
+
+
 };
 
 #endif

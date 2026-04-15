@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 22:17:39 by mkhavari          #+#    #+#             */
-/*   Updated: 2025/09/24 22:17:40 by mkhavari         ###   ########.fr       */
+/*   Created: 2025/09/24 22:18:24 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/09/25 08:52:25 by mkhavari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-#define BRAIN_HPP
+#ifndef	ANIMAL_HPP
+#define	ANIMAL_HPP
 #include <iostream>
+#include <stdio.h>
 #include <stdlib.h>
 
-class Brain
+#define PREV 1
+class AAnimal
 {
-	private:
-		std::string ideas[100];
+	protected:
+		std::string type;
 	public:
-		Brain(); // create new object
-		Brain(std::string ideas[]); // create new object
-		~Brain();	// delete that object
-		Brain(const Brain& other);
-		Brain& operator=(const Brain& other);
-		std::string *getIdeas();
+		AAnimal();
+		AAnimal(std::string type);
+		virtual ~AAnimal();
+		AAnimal(const AAnimal& other);
+		AAnimal& operator=(const AAnimal& other);
+		virtual void makeSound() const = 0; // if assgin to 0, then it becomes to abstract class
+		std::string getType() const;
 };
-
 #endif

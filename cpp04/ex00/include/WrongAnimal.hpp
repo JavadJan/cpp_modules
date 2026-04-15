@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 22:17:39 by mkhavari          #+#    #+#             */
-/*   Updated: 2025/09/24 22:17:40 by mkhavari         ###   ########.fr       */
+/*   Created: 2025/09/24 22:17:04 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/09/24 22:17:05 by mkhavari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-#define BRAIN_HPP
+
+#ifndef	WRONGANIMAL_HPP
+#define	WRONGANIMAL_HPP
 #include <iostream>
-#include <stdlib.h>
 
-class Brain
+class WrongAnimal
 {
-	private:
-		std::string ideas[100];
+	protected:
+		std::string type;
 	public:
-		Brain(); // create new object
-		Brain(std::string ideas[]); // create new object
-		~Brain();	// delete that object
-		Brain(const Brain& other);
-		Brain& operator=(const Brain& other);
-		std::string *getIdeas();
-};
+		WrongAnimal();
+		WrongAnimal(const std::string &type);
 
+		~WrongAnimal();
+		WrongAnimal(const WrongAnimal& other);
+		WrongAnimal& operator=(const WrongAnimal& other);
+
+		void makeSound() const;
+		std::string getType() const; 
+};
 #endif
