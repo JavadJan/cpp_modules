@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_search.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/03 15:18:10 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/09/03 15:18:12 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./include/PhoneBook.hpp"
 
 void	display_phonebook(Contact contact[], int count);
@@ -30,12 +42,13 @@ void PhoneBook::add(Contact contact, int count)
 {
 	this->contact[(count - 1) - (8 * ((count - 1) / 8))] = contact; // this->contact[count %8]
 	std::cout << "try to add new contact in phonebook\n";
-	display_phonebook(this->contact, count);
+	if (!contact.getName().empty() || !contact.getLastName().empty() || !contact.getNickname().empty())
+		display_phonebook(this->contact, count);
 }
 
 void	display_phonebook(Contact contact[], int count)
 {
-	//int limit = count < 8 ? count : 8;
+	// int limit = count < 8 ? count : 8;
 	std::cout << "\033[1;32m|\033[0m";
 	print_cell("Index");
 
@@ -50,13 +63,13 @@ void	display_phonebook(Contact contact[], int count)
 	std::cout << "\033[1;32m|\033[0m";
 	print_cell("Nickname");
 
-	//std::cout << "\033[1;32m|\033[0m";
-	//print_cell("Phone Num");
+	// std::cout << "\033[1;32m|\033[0m";
+	// print_cell("Phone Num");
 
 	std::cout << "\033[1;32m|\033[0m";
 	std::cout << '\n';
 
-	for (int y = 0; y < count; y++) // why not count?
+	for (int y = 0; y < count; y++)
 	{
 		std::cout << "\033[1;32m|\033[0m";
 		print_cell(contact[y].getIndex());
@@ -71,8 +84,8 @@ void	display_phonebook(Contact contact[], int count)
 		std::cout << "\033[1;32m|\033[0m";
 		print_cell(contact[y].getNickname());
 
-		//std::cout << "\033[1;32m|\033[0m";
-		//print_cell(contact[y].getPhoneNumber());
+		// std::cout << "\033[1;32m|\033[0m";
+		// print_cell(contact[y].getPhoneNumber());
 
 		std::cout << "\033[1;32m|\033[0m";
 		std::cout << '\n';
@@ -95,31 +108,28 @@ void PhoneBook::search()
 	for (size_t i = 0; i < 8; i++)	
 	{
 		const Contact &c = this->contact[i];
-				
+
 		ss << c.getIndex();
 		std::string str_index = ss.str();
 		if (
+			str_index.find(search) != std::string::npos ||
 			c.getName().find(search)     != std::string::npos ||
 			c.getLastName().find(search) != std::string::npos ||
 			c.getNickname().find(search) != std::string::npos ||
-			str_index.find(search) != std::string::npos ||
 			c.getPhoneNumber().find(search) != std::string::npos
 		)
 		{
-			//std::cout << c.getLastName() << "is found" << std::endl;
+			std::cout << "✔️ Found match in contact index " << c.getIndex() << '\n';
 			found_c[j++] = c;
  			found = true;
-			//break ;
+			// break ;
 		}
 	}
 
 	if (!found)
 		std::cout << "❌ No matching contacts found for \"" << search << "\"\n";
 	else
-	{
-		std::cout << "✔️ Found match " << j << "contacts " << std::endl;
 		display_phonebook(found_c, j);
-	}
 	//std::cout << "search for " << search << '\n';
 	// FROM Contact WHERE {contact.name.contain(search) || contact.lastname.contain(search)
 	//						contact.nickname.contain(search) || contact.tel.contain(search)

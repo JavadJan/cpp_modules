@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/03 15:18:20 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/09/03 15:18:21 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./include/PhoneBook.hpp"
 
 PhoneBook::PhoneBook(Contact contact[])
@@ -38,6 +50,7 @@ int	main(void)
 	std::string l_name;
 	std::string nickname;
 	std::string tel;
+	std::string secret;
 
 	int count = 0;
 	std::string state;
@@ -56,10 +69,9 @@ int	main(void)
 			std::cout << "\nCtrl+D detected. Exiting cleanly.\n";
 			exit(0);
 		}
-		if (std::cin.fail()) // eof 
+		if (std::cin.fail())
 		{
-			std::cin.clear(); // clear error buffer
-			// Clearing the input buffer to ignore the leftover newline character
+			std::cin.clear();
 			std::cin.ignore(1000, '\n');
 			std::cout << "ERROR Input failed.\n";
 			continue;
@@ -81,8 +93,9 @@ int	main(void)
 			
 			tel = get_value("Enter your Phone Number: "); 
 
-			Contact contact(name, l_name, nickname, tel, "********", ++count);
+			secret = get_value("Enter your Phone Secret: "); 
 
+			Contact contact(name, l_name, nickname, tel, secret, ++count); // constructor for contact called
 			phonebook.add(contact, count);
 			continue ;
 		}
@@ -98,13 +111,3 @@ int	main(void)
 	}
 	return (0);
 }
-
-/* 
-	1. define class
-	2. instnciate obj
-	3. declare as private member
-	4. getter
-	5. init value in constructor
-	6. define constructor
-	7. user intract with getLine
-*/

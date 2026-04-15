@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 14:44:26 by mkhavari          #+#    #+#             */
+/*   Updated: 2026/04/15 21:05:53 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 
 int main(int ac, char **av)
@@ -8,12 +20,15 @@ int main(int ac, char **av)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else
 	{
-		while (av[i])
+		while (i < ac)
 		{
 			for (size_t j = 0; av[i][j]; j++)
 			{
-				std::cout << (char)toupper(av[i][j]) ;
+				av[i][j] << (char)toupper(av[i][j]) ;
 			}
+			std::cout << av[i] ;
+			if (av[i] != NULL)
+				std::cout << " ";
 			i++;
 		}
 		std::cout << std::endl;
