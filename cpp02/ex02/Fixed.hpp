@@ -15,6 +15,7 @@ class	Fixed
 		//Fixed(Fixed& operator*(const Fixed& other));
 		~Fixed();
 		Fixed(const Fixed& other); // copy constructor
+		// return a refrence to the current object.
 		Fixed& operator = (const Fixed& other); //asignment constructor
 		int getRawBits( void ) const;
 		void setRawBits( int const raw );
@@ -41,7 +42,7 @@ class	Fixed
     	Fixed& operator--();     // --a
 		Fixed operator--(int);   // a--
 
-		/* max, min,  */
+		/* max, min,  */ 
 		static const Fixed& max(const Fixed& a, const Fixed& b);
 		static Fixed& max(Fixed& a, Fixed& b);
 		static Fixed& min(Fixed& a, Fixed& b);

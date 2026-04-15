@@ -1,15 +1,18 @@
 CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -I.
 
 SRC = main.cpp Fixed.cpp
 
 NAME = fixed
+
+HEDAER = Fixed.hpp
+
 OBJ = $(SRC:.cpp=.o)
 
 all : $(NAME)
 
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(HEDAER)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "✅ successfully created 🏗️ 🛠️!"
 

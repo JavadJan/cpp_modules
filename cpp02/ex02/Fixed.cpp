@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 15:20:17 by mkhavari          #+#    #+#             */
+/*   Updated: 2026/04/15 21:13:33 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 const int Fixed::fractional = 8;
@@ -144,7 +156,10 @@ bool Fixed::operator!=(const Fixed& other) const
 // modify the obj and return itself like ++a
 Fixed& Fixed::operator++() // return itself, it refer to itself
 {
+
+	// std::cout << this->fixed_point << "value of fixed\n";
 	this->fixed_point++;
+	// std::cout << this->fixed_point << "value of fixed\n";
 	return (*this);
 }
 Fixed& Fixed::operator--() // return itself, it refer to itself
@@ -154,7 +169,9 @@ Fixed& Fixed::operator--() // return itself, it refer to itself
 }
 Fixed Fixed::operator++(int) // return itself, it refer to itself
 {
+
 	Fixed temp = *this; // current then ++ and the return the current
+
 	this->fixed_point++;
 	return (temp);
 }
@@ -168,6 +185,7 @@ Fixed Fixed::operator--(int) // return itself, it refer to itself
 /* max, min */
 const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
 {
+	// std::cout << "\033[1;33mMax with const run\033[0m" << std::endl;
 	if (a > b)
 		return (a);
 	else 
@@ -182,6 +200,7 @@ const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 }
 Fixed& Fixed::max(Fixed& a, Fixed& b)
 {
+	// std::cout << "\033[1;32mMax without const run\033[0m" << std::endl;
 	if (a > b)
 		return (a);
 	else 

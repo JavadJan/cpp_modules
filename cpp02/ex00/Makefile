@@ -5,7 +5,7 @@ SRC = main.cpp Fixed.cpp
 
 HEADER = Fixed.hpp
 
-NAME = a
+NAME = fixed
 OBJ = $(SRC:.cpp=.o)
 
 all : $(NAME)

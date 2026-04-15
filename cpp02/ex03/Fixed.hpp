@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 15:20:17 by mkhavari          #+#    #+#             */
+/*   Updated: 2026/04/15 21:14:29 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FIXED_HPP
 #define FIXED_HPP
 #include <iostream>
@@ -15,6 +27,7 @@ class	Fixed
 		//Fixed(Fixed& operator*(const Fixed& other));
 		~Fixed();
 		Fixed(const Fixed& other); // copy constructor
+		// return a refrence to the current object.
 		Fixed& operator = (const Fixed& other); //asignment constructor
 		int getRawBits( void ) const;
 		void setRawBits( int const raw );
@@ -41,7 +54,7 @@ class	Fixed
     	Fixed& operator--();     // --a
 		Fixed operator--(int);   // a--
 
-		/* max, min,  */
+		/* max, min,  */ 
 		static const Fixed& max(const Fixed& a, const Fixed& b);
 		static Fixed& max(Fixed& a, Fixed& b);
 		static Fixed& min(Fixed& a, Fixed& b);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 15:20:17 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/09/22 18:26:57 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 const int Fixed::fractional = 8;
@@ -59,7 +71,7 @@ float Fixed::toFloat(void) const
 
 int Fixed::toInt(void) const
 {
-	return (this->fixed_point >> this->fractional);
+	return (this->fixed_point >> this->fractional); // 42.42 == this->fixed / 256
 }
 
 std::ostream    &operator<<(std::ostream &out, Fixed const &fixed)
