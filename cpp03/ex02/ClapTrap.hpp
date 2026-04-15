@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 15:16:00 by mkhavari          #+#    #+#             */
+/*   Updated: 2026/04/15 21:21:22 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
 
@@ -16,10 +29,10 @@ class ClapTrap{
 		ClapTrap& operator=(const ClapTrap& other);
 
 		/* getter */
-		int get_hit_pointes() const;
-		int get_energy_points() const;
-		int get_attack_damage() const;
-		std::string get_name() const;
+		// int get_hit_pointes() const;
+		// int get_energy_points() const;
+		// int get_attack_damage() const;
+		// std::string get_name() const;
 
 		/* behaves: */
 		virtual void attack(const std::string& target);

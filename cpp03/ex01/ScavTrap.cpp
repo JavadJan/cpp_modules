@@ -1,32 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 15:16:00 by mkhavari          #+#    #+#             */
+/*   Updated: 2026/04/15 21:21:09 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() /*:name(""),  hit_points(100) you can only init your member in initilazer*/
 {
 	this->name = "Unknown";
 	this->hit_points = 100;
 	this->energy_points = 50;
 	this->attack_damage = 20;
-	std::cout << "\033[35mDerived Base ScaveTrap constructor\n\033[0m";
+	std::cout << "\033[35mDerived default constructor called \n\033[0m";
 }
 
 ScavTrap::ScavTrap(std::string name):ClapTrap(name)
 {
-	this->name = name;
+	// this->name = name;
 	this->hit_points = 100;
 	this->energy_points = 50;
 	this->attack_damage = 20;
-	std::cout << "\033[35mDerived ScaveTrap with params constructor\033[0m" << std::endl;
+	std::cout << "\033[35mDerived param constructor called\033[0m" << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "\033[35mDerived ScaveTrap deconstructor\033[0m" << std::endl;
+	std::cout << "\033[35mDerived deconstructor called\033[0m" << std::endl;
 }
 /* copy constructor */
 ScavTrap::ScavTrap(const ScavTrap& other):ClapTrap(other) // call ClapTrap constructor
 {
-	std::cout << "ScavTrap copy constructor is called" << std::endl;
-	*this = other;
+	std::cout << "Derived copy constructor called" << std::endl;
 }
 
 /* copy assignment construtor */
@@ -34,11 +45,12 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 {
 	if (this != &other)
 	{
-		std::cout << "ScavTrap Assignation operator called" << std::endl;
+		std::cout << "Derived copy Assignation operator called" << std::endl;
 		this->name = other.name;
 		this->attack_damage = other.attack_damage;
 		this->energy_points = other.energy_points;
 		this->hit_points = other.hit_points;
+		
 	}
 	return (*this);
 }

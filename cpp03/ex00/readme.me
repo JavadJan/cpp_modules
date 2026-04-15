@@ -1,0 +1,38 @@
+instructure: 
+	1. I init the parameter with initialzer
+	2. we have 4 private attributes, thses accessbile just with getter and setter
+	3. I defeined 4 getter
+	
+	javad attack target1
+
+
+	// * ClapTrap can’t do anything if it has no hit points or energy points left:
+	=>check !(hit_points and energy_point) else {print error with dead not energy}
+
+	#ClapTrap.rapair(ampunt) => {this->hit_points += amount; this->energy_points--;}
+	#CalpTrap.attack(amount)	=> {this->energy_points--; cost amount on its enomy;}
+
+	//* since these exercises serve as an introduction, the ClapTrap
+	instances should not interact directly with one another, and the parameters will not refer
+	to another instance of ClapTrap.
+
+
+* for copy constructor which one is better? 
+ClapTrap::ClapTrap(const ClapTrap& other)
+{
+	std::cout << "Copy Construcotr was called" << std::endl;
+	*this = other; 
+	// just this enough or copy every single attribute? 
+}
+
+
+#this kind of copy constructor has drawback;
+	1.  If the assignment operator has side effects (here it prints messages via getters), those side effects will occur during copy construction, 
+	2. if your class contained const or reference members, assignment would not compile 
+	3. a reference or const member can not be assigend in constructor
+	ClapTrap::ClapTrap(const ClapTrap& other)
+	{
+		std::cout << "\033[1;33mCopy Construcotr was called\033[0m" << std::endl;
+		*this = other; // calling assignment operator has drawa
+		// this->hit_points = 
+	}
