@@ -1,7 +1,8 @@
-CC = g++
+CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 SRC = main.cpp
+
 
 NAME = brain
 OBJ = $(SRC:.cpp=.o)
@@ -9,13 +10,13 @@ OBJ = $(SRC:.cpp=.o)
 all : $(NAME)
 
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(HEADER)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "✅ successfully created 🏗️!"
 
 %.o:%.cpp
 	$(CC) $(FLAGS) -c $< -o $@
-	@echo "Objects successfully created ✅"
+
 clean :
 	rm -f $(OBJ)
 

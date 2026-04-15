@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkhavari <mkhavari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/03 21:30:20 by mkhavari          #+#    #+#             */
+/*   Updated: 2025/09/03 21:30:22 by mkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Harl.hpp"
 
 void Harl::debug()
@@ -8,7 +20,7 @@ void Harl::debug()
 
 void Harl::info()
 {
-	std::cout << "[info]\n I cannot believe adding extra bacon costs more money. You didn’t put" 
+	std::cout << "[INFO]\n I cannot believe adding extra bacon costs more money. You didn’t put" 
 				<< "enough bacon in my burger! If you did, I wouldn’t be asking for more! \n";
 }
 
@@ -51,22 +63,27 @@ void Harl::complain(std::string level)
 		std::cout << "level is not found, or miss seppelling!\n";
 		return ;
 	}
-	switch (i)
+	while (i < 4)
 	{
-		case (0):
-			(this->*call_func[0])();						
+		switch (i)
+		{
+			case (0):
+				(this->*call_func[0])();						
+				break;
+			case (1):
+				(this->*call_func[1])();						
+				break;
+			case (2):
+				(this->*call_func[2])();						
+				break;
+			case (3):
+				(this->*call_func[3])();						
+				break;
+		
+		default:
 			break;
-		case (1):
-			(this->*call_func[1])();						
-			break;
-		case (2):
-			(this->*call_func[2])();						
-			break;
-		case (3):
-			(this->*call_func[3])();						
-			break;
+		}	
+		i++;
+	}
 	
-	default:
-		break;
-	}	
 }

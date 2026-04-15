@@ -1,31 +1,27 @@
-CC = g++
-FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -I. #. means current dir
-header = Zombie.hpp
+CC = c++
+FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -I.
 RM = rm -f
 SRC = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+
+HEADER = Zombie.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
 NAME = zombie
 all: $(NAME)
 
-$(NAME) : $(OBJ) $(header)
+$(NAME) : $(OBJ) $(HEADER)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "✅ successfully created 🏗️!"
 
-
 %.o:%.cpp
 	$(CC) $(FLAGS) -c $< -o $@
-	@echo $< "created to " $@
-	@echo "successfully creatd objects !" 
 
 clean:
 	rm -f $(OBJ)
-	@echo "cleaned all objects 🗑️"
 
 fclean: clean
 	$(RM) $(NAME)
-	@echo "cleaned all 🗑️"
 
 re: fclean $(NAME)
 
